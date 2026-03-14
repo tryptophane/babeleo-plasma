@@ -1,6 +1,6 @@
-# Babeleo — KDE Plasma 6 Quick-Search Panel Applet
+# Babeleo — KDE Plasma 6 Quick Translation and Search Applet
 
-A KDE Plasma 6 panel applet for instant access to any web service from your desktop.
+A KDE Plasma 6 applet to query any web service with the clipboard content or typed text.
 Select text with the mouse, click the icon — your browser opens the result directly.
 Works with translation services, dictionaries, encyclopedias, search engines, and anything
 else you can reach with a URL.
@@ -17,6 +17,7 @@ else you can reach with a URL.
 - **Fully configurable services**: add, edit, remove any engine — point it at any URL that accepts a query string
 - **Automatic favicon download**: each service displays its website icon
 - **Context menu**: quickly switch between services, organize them into main menu and submenu
+- **Desktop widget**: can also be added to the desktop — clipboard support is not available in that mode, but manual queries work fully
 
 ## Built-in services (all configurable)
 
