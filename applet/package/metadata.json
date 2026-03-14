@@ -8,9 +8,9 @@
             }
         ],
         "Category": "Language",
-        "Description": "Translate clipboard content at leo.org and other dictionaries",
-        "Description[de]": "Inhalt der Zwischenablage bei leo.org und anderen Wörterbüchern übersetzen",
-        "Description[fr]": "Traduction du contenu du presse-papiers",
+        "Description": "Open selected or typed text in translation services, dictionaries, and other web services",
+        "Description[de]": "Markierten oder eingegebenen Text in Übersetzungsdiensten, Wörterbüchern und anderen Webdiensten öffnen",
+        "Description[fr]": "Ouvrir le texte sélectionné ou saisi dans des services de traduction, dictionnaires et autres services web",
         "EnabledByDefault": true,
         "Icon": "babelfishleo-en",
         "Id": "org.kde.plasma.babeleo",

@@ -1,7 +1,9 @@
-# Babeleo — KDE Plasma 6 Translator Applet
+# Babeleo — KDE Plasma 6 Quick-Search Panel Applet
 
-A KDE Plasma 6 panel applet for fast, one-click translation and dictionary lookups.
-Select a word with the mouse, click the icon — your browser opens the result directly.
+A KDE Plasma 6 panel applet for instant access to any web service from your desktop.
+Select text with the mouse, click the icon — your browser opens the result directly.
+Works with translation services, dictionaries, encyclopedias, search engines, and anything
+else you can reach with a URL.
 
 ![Babeleo in action](https://github.com/tryptophane/babeleo-plasma/raw/main/screenshot.png)
 
@@ -9,23 +11,22 @@ Select a word with the mouse, click the icon — your browser opens the result d
 
 ## Features
 
-- **One-click translation**: select text with the mouse, click the icon → browser opens with the result
+- **One-click lookup**: select text with the mouse, click the icon → browser opens the result
 - **Manual query**: enter a search term directly in the applet's popup dialog
 - **Global keyboard shortcut**: configurable shortcut for hands-free use
-- **Fully configurable search engines**: add, edit, remove any engine — the built-in list is just a starting point
-- **Automatic favicon download**: engines display their website icon
-- **Context menu**: quickly switch between engines, organize them into main menu and submenu
+- **Fully configurable services**: add, edit, remove any engine — point it at any URL that accepts a query string
+- **Automatic favicon download**: each service displays its website icon
+- **Context menu**: quickly switch between services, organize them into main menu and submenu
 
-## Built-in search engines (all configurable)
+## Built-in services (all configurable)
 
-The applet ships with a set of example engines to get you started. You can add,
+The applet ships with a set of example services to get you started. You can add,
 remove or change all of them freely — none are mandatory:
 
-- **leo.org** (EN↔DE, FR↔DE, ES↔DE, IT↔DE, ZH↔DE)
-- **Wikipedia** (DE, EN, FR)
-- **PONS** (DE↔EN, German monolingual)
-- **Google Translate**
-- **Duden**, **Real Academia Española**, **PubMed**, and more
+- **Translation**: Google Translate, PONS (DE↔EN), leo.org (DE↔EN/FR/ES/IT/ZH)
+- **Encyclopedias**: Wikipedia (DE, EN, FR)
+- **Monolingual dictionaries**: Duden (DE), Real Academia Española (ES)
+- **Other**: PubMed (medical literature), Google Maps, and more
 
 No data is ever sent to any service without an explicit user action (clicking).
 Your browser handles all communication — Babeleo only opens a URL.
