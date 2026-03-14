@@ -482,6 +482,7 @@ void Babeleo::populateEngines()
 {
     m_enginesList.clear();
 
+    // --- Main menu (position 0) ---
     m_enginesList << QStringLiteral("Leo En - De")
                   << QStringLiteral("https://dict.leo.org/englisch-deutsch/%s")
                   << QStringLiteral("babelfishleo-en") << QStringLiteral("0") << QStringLiteral("0");
@@ -492,70 +493,79 @@ void Babeleo::populateEngines()
 
     m_enginesList << QStringLiteral("Leo Es - De")
                   << QStringLiteral("https://dict.leo.org/spanisch-deutsch/%s")
-                  << QStringLiteral("babelfishleo-es") << QStringLiteral("0") << QStringLiteral("0");
+                  << QStringLiteral("babelfishleo-es") << QStringLiteral("1") << QStringLiteral("0");
 
     m_enginesList << QStringLiteral("Leo It - De")
                   << QStringLiteral("https://dict.leo.org/italienisch-deutsch/%s")
-                  << QStringLiteral("babelfishleo-it") << QStringLiteral("0") << QStringLiteral("0");
+                  << QStringLiteral("babelfishleo-it") << QStringLiteral("1") << QStringLiteral("0");
 
     m_enginesList << QStringLiteral("Leo Ch - De")
                   << QStringLiteral("https://dict.leo.org/chinesisch-deutsch/%s")
-                  << QStringLiteral("babelfishleo-ch") << QStringLiteral("0") << QStringLiteral("0");
+                  << QStringLiteral("babelfishleo-ch") << QStringLiteral("1") << QStringLiteral("0");
 
-    m_enginesList << QStringLiteral("PONS De - En")
-                  << QStringLiteral("https://de.pons.com/%C3%BCbersetzung?q=%s&l=deen")
+    m_enginesList << QStringLiteral("DuckDuckGo")
+                  << QStringLiteral("https://duckduckgo.com/?q=%s&ia=web")
+                  << QStringLiteral("babelfishleo") << QStringLiteral("0") << QStringLiteral("0");
+
+    m_enginesList << QStringLiteral("Google Translate De")
+                  << QStringLiteral("https://translate.google.com/?sl=auto&tl=de&text=%s")
+                  << QStringLiteral("babelfishleo") << QStringLiteral("0") << QStringLiteral("0");
+
+    m_enginesList << QStringLiteral("Wikipedia DE")
+                  << QStringLiteral("https://de.wikipedia.org/wiki/%s")
+                  << QStringLiteral("babelfishleo") << QStringLiteral("0") << QStringLiteral("0");
+
+    // --- Submenu (position 1) ---
+    m_enginesList << QStringLiteral("Amazon")
+                  << QStringLiteral("https://www.amazon.de/s?k=%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
-    m_enginesList << QStringLiteral("PONS deutsch")
-                  << QStringLiteral("https://de.pons.com/%C3%BCbersetzung?q=%s&l=dede")
+    m_enginesList << QStringLiteral("Cambridge Dictionary")
+                  << QStringLiteral("https://dictionary.cambridge.org/dictionary/english-german/%s")
+                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
+
+    m_enginesList << QStringLiteral("Collins En - De")
+                  << QStringLiteral("https://www.collinsdictionary.com/dictionary/english-german/%s")
+                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
+
+    m_enginesList << QStringLiteral("dict.cc")
+                  << QStringLiteral("https://www.dict.cc/?s=%s")
+                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
+
+    m_enginesList << QStringLiteral("Duden")
+                  << QStringLiteral("https://www.duden.de/suchen/dudenonline/%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
     m_enginesList << QStringLiteral("Google")
                   << QStringLiteral("https://www.google.com/search?q=%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
-    m_enginesList << QStringLiteral("Google Translate De - En")
-                  << QStringLiteral("https://translate.google.com/?sl=de&tl=en&text=%s&op=translate")
-                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
-
-    m_enginesList << QStringLiteral("Wikipedia DE")
-                  << QStringLiteral("https://de.wikipedia.org/wiki/%s")
-                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
-
-    m_enginesList << QStringLiteral("Wikipedia EN")
-                  << QStringLiteral("https://en.wikipedia.org/wiki/%s")
-                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("1");
-
-    m_enginesList << QStringLiteral("Duden")
-                  << QStringLiteral("https://www.duden.de/suchen/dudenonline/%s")
-                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
-
     m_enginesList << QStringLiteral("Google Maps")
                   << QStringLiteral("https://www.google.com/maps/search/?q=%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
-    m_enginesList << QStringLiteral("PubMed")
-                  << QStringLiteral("https://pubmed.ncbi.nlm.nih.gov/?term=%s")
-                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("1");
-
-    m_enginesList << QStringLiteral("Real Academia Espanola")
-                  << QStringLiteral("https://dle.rae.es/%s")
-                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
-
     m_enginesList << QStringLiteral("Linguee")
-                  << QStringLiteral("https://www.linguee.com/search?query=%s")
+                  << QStringLiteral("https://www.linguee.com/english-german/search?source=auto&query=%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
     m_enginesList << QStringLiteral("Merriam-Webster")
                   << QStringLiteral("https://www.merriam-webster.com/dictionary/%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
-    m_enginesList << QStringLiteral("Wiktionary EN")
-                  << QStringLiteral("https://en.wiktionary.org/wiki/%s")
+    m_enginesList << QStringLiteral("PubMed")
+                  << QStringLiteral("https://pubmed.ncbi.nlm.nih.gov/?term=%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
-    m_enginesList << QStringLiteral("Cambridge Dictionary")
-                  << QStringLiteral("https://dictionary.cambridge.org/dictionary/english/%s")
+    m_enginesList << QStringLiteral("Real Academia Espanola")
+                  << QStringLiteral("https://dle.rae.es/%s")
+                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
+
+    m_enginesList << QStringLiteral("Wikipedia EN")
+                  << QStringLiteral("https://en.wikipedia.org/wiki/%s")
+                  << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
+
+    m_enginesList << QStringLiteral("Wiktionary EN")
+                  << QStringLiteral("https://en.wiktionary.org/wiki/%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
     m_configuration.writeEntry("engines", m_enginesList);

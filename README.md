@@ -23,9 +23,11 @@ else you can reach with a URL.
 The applet ships with a set of example services to get you started. You can add,
 remove or change all of them freely — none are mandatory:
 
-- **Translation**: Google Translate, PONS (DE↔EN), Linguee, leo.org (DE↔EN/FR/ES/IT/ZH)
-- **Encyclopedias & dictionaries**: Wikipedia (DE, EN), Wiktionary (EN), Duden (DE), Merriam-Webster (EN), Cambridge Dictionary (EN), Real Academia Española (ES)
-- **Other**: PubMed (medical literature), Google Maps, and more
+- **Translation**: Google Translate, Linguee, leo.org (DE↔EN/FR/ES/IT/ZH)
+- **Search**: Google, DuckDuckGo, Amazon (DE)
+- **Encyclopedias**: Wikipedia (DE, EN), Wiktionary (EN)
+- **Dictionaries**: Duden (DE), Cambridge Dictionary (EN-DE), Collins (EN-DE), dict.cc, Merriam-Webster (EN), Real Academia Española (ES)
+- **Other**: Google Maps, PubMed (medical literature)
 
 No data is ever sent to any service without an explicit user action (clicking).
 Your browser handles all communication — Babeleo only opens a URL.
