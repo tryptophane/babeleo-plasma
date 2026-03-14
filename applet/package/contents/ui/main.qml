@@ -31,6 +31,9 @@ PlasmoidItem {
     // We handle activation exclusively in the Connections block below.
     activationTogglesExpanded: false
 
+    toolTipMainText: i18nd("plasma_applet_babeleo", "Babeleo Translator")
+    toolTipSubText: i18nd("plasma_applet_babeleo", "Current engine: %1", root.plasmoid.currentEngine)
+
     // Set to true during onActivated handling to block Plasma's setExpanded(true),
     // which is called AFTER the activated() signal is emitted (not before).
     property bool blockExpand: false

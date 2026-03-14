@@ -32,6 +32,14 @@ msgid "A search engine with this name already exists."
 msgstr "Un moteur de recherche portant ce nom existe déjà."
 
 #: applet/package/contents/ui/main.qml
+msgid "Babeleo Translator"
+msgstr "Babeleo (traducteur)"
+
+#: applet/package/contents/ui/main.qml
+msgid "Current engine: %1"
+msgstr "Moteur actuel : %1"
+
+#: applet/package/contents/ui/main.qml
 msgid "Translate clipboard content\nCurrent engine: %1"
 msgstr "Traduire le contenu du presse-papiers\nMoteur actuel : %1"
 
