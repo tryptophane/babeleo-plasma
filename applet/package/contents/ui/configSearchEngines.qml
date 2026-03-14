@@ -250,6 +250,7 @@ Item {
             PC3.ScrollView {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Layout.bottomMargin: Kirigami.Units.smallSpacing
 
                 ListView {
                     id: engineList
