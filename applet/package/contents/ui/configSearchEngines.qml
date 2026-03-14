@@ -9,18 +9,27 @@
  *   This means Cancel correctly discards everything without any cleanup.
  *
  * Data flow:
- *   Load:        Plasmoid.self.engineList() → engineModel + originalEngineNames
+ *   Load:        Plasmoid.self.engineList() → engineModel + originalSnapshot
  *   Edit form:   form fields → engineModel (via commitCurrentToModel())
  *   Switch item: commitCurrentToModel(), then loadFormFromModel(newIndex)
  *   Add/Delete:  engineModel only (no C++ calls)
- *   Fetch icon:  Plasmoid.self.fetchIcon() → async signal → update engineModel
+ *   Fetch icon:  Plasmoid.self.fetchIcon() → async signal → saveEngine() directly
  *   Apply/OK:    saveConfig() → compare model with originalEngineNames →
  *                deleteEngine() for removed, saveEngine() for all current →
  *                rebuildAfterConfigChange()
  *
+ * Change detection:
+ *   The "unsavedChanges" property is what Plasma 6 binds the Apply button to
+ *   (via unsavedChangesChanged signal in AppletConfiguration.qml). It is set
+ *   dynamically by comparing the full model state against originalSnapshot.
+ *   This allows the Apply button to be re-disabled when the user reverts
+ *   changes back to the original values.
+ *   We deliberately never emit the "configurationChanged" signal, because that
+ *   sets wasConfigurationChangedSignalSent=true permanently in Plasma's dialog,
+ *   preventing the Apply button from ever being disabled again until OK/Cancel.
+ *
  * The "loading" flag suppresses onTextChanged / onCheckedChanged handlers
- * while we populate form fields programmatically, preventing false
- * configurationChanged() signals that would incorrectly enable the Apply button.
+ * while we populate form fields programmatically.
  */
 import QtQuick
 import QtQuick.Layouts
@@ -32,16 +41,17 @@ import org.kde.kirigami as Kirigami
 Item {
     id: root
 
-    // Standard Plasma config page interface
+    // Standard Plasma config page interface.
+    // unsavedChanges is read by AppletConfiguration.qml to enable/disable Apply.
+    // We never emit configurationChanged signal — see header comment.
     signal configurationChanged
-    property bool localChanges: false
+    property bool unsavedChanges: false
 
     // -------------------------------------------------------------------------
     // Internal state
     // -------------------------------------------------------------------------
 
     // Suppresses form field change handlers during programmatic population.
-    // Like a "batch update" flag - prevents false configurationChanged signals.
     property bool loading: false
 
     // Index of the engine currently shown in the form
@@ -50,6 +60,10 @@ Item {
     // Original engine names from C++ at load time, used in saveConfig() to
     // detect which engines were deleted (present in original but not in model).
     property var originalEngineNames: []
+
+    // Full snapshot of engine data at load time (or after last Apply).
+    // Used by modelMatchesOriginal() to detect real changes vs. reverts.
+    property var originalSnapshot: []
 
     ListModel {
         id: engineModel
@@ -64,6 +78,10 @@ Item {
         engineModel.clear()
         const list = Plasmoid.self.engineList()
         originalEngineNames = list.map(e => e.name)
+        originalSnapshot = list.map(e => ({
+            name: e.name, url: e.url, icon: e.icon,
+            position: e.position, hidden: e.hidden
+        }))
         for (const eng of list) {
             engineModel.append({
                 name:     eng.name,
@@ -86,12 +104,10 @@ Item {
         engineModel.setProperty(currentIndex, "icon",     iconField.text)
         engineModel.setProperty(currentIndex, "position", mainMenuRadio.checked ? "0" : "1")
         engineModel.setProperty(currentIndex, "hidden",   hideBox.checked)
-        // If the name changed, currentIndex still points to the same slot,
-        // but the displayed name in the list updates via the model binding.
     }
 
     // Load form fields from the local model at the given index.
-    // Sets loading = true so form field handlers don't fire configurationChanged.
+    // Sets loading = true so form field handlers don't trigger change detection.
     function loadFormFromModel(index) {
         if (index < 0 || index >= engineModel.count) return
         loading = true
@@ -112,8 +128,31 @@ Item {
         commitCurrentToModel()
         engineList.currentIndex = index
         loadFormFromModel(index)
-        // Don't reset localChanges - the user may have already made changes
-        // to other engines. localChanges tracks ANY pending change in the session.
+        // Don't reset unsavedChanges — the user may have already changed other engines.
+    }
+
+    // Returns true if the current model state matches the original snapshot exactly.
+    function modelMatchesOriginal() {
+        if (engineModel.count !== originalSnapshot.length) return false
+        const origMap = {}
+        for (const e of originalSnapshot) origMap[e.name] = e
+        for (let i = 0; i < engineModel.count; i++) {
+            const eng = engineModel.get(i)
+            const orig = origMap[eng.name]
+            if (!orig) return false
+            if (eng.url      !== orig.url      ||
+                eng.icon     !== orig.icon     ||
+                eng.position !== orig.position ||
+                eng.hidden   !== orig.hidden) return false
+        }
+        return true
+    }
+
+    // Called from form field change handlers. Commits form to model, then
+    // updates unsavedChanges based on a full comparison with the original snapshot.
+    function checkForChanges() {
+        commitCurrentToModel()
+        unsavedChanges = !modelMatchesOriginal()
     }
 
     // Called by Plasma when the user clicks Apply or OK.
@@ -135,14 +174,10 @@ Item {
         }
 
         // Save all engines from the local model to C++.
-        // For each engine: use the ORIGINAL name as oldName if it existed,
-        // or "" if it is a newly added engine.
         // saveEngine("", newName, ...) creates a new entry.
         // saveEngine(origName, newName, ...) replaces the existing entry.
         for (let i = 0; i < engineModel.count; i++) {
             const eng = engineModel.get(i)
-            // If the engine's CURRENT name matches an original name, use it as oldName.
-            // Renames: the old name was deleted above (not in newNames), new name is created here.
             const oldName = originalEngineNames.includes(eng.name) ? eng.name : ""
             Plasmoid.self.saveEngine(oldName, eng.name, eng.url, eng.icon,
                                      eng.position, eng.hidden)
@@ -153,7 +188,13 @@ Item {
 
         // Update our baseline for the next Apply click
         originalEngineNames = newNames
-        localChanges = false
+        originalSnapshot = []
+        for (let i = 0; i < engineModel.count; i++) {
+            const eng = engineModel.get(i)
+            originalSnapshot.push({ name: eng.name, url: eng.url, icon: eng.icon,
+                                    position: eng.position, hidden: eng.hidden })
+        }
+        unsavedChanges = false
     }
 
     Component.onCompleted: {
@@ -185,8 +226,26 @@ Item {
                 iconField.text = iconPath
                 loading = false
             }
-            localChanges = true
-            root.configurationChanged()
+            // Save the icon immediately to KConfig — no Apply click needed.
+            // The icon file is already on disk; we just persist the path reference.
+            for (let i = 0; i < engineModel.count; i++) {
+                const eng = engineModel.get(i)
+                if (eng.name === engineName) {
+                    Plasmoid.self.saveEngine(engineName, engineName, eng.url, iconPath,
+                                            eng.position, eng.hidden)
+                    // Also update the snapshot so this no longer counts as a change.
+                    for (let j = 0; j < originalSnapshot.length; j++) {
+                        if (originalSnapshot[j].name === engineName) {
+                            const s = originalSnapshot[j]
+                            originalSnapshot[j] = { name: s.name, url: s.url, icon: iconPath,
+                                                    position: s.position, hidden: s.hidden }
+                            break
+                        }
+                    }
+                    break
+                }
+            }
+            unsavedChanges = !modelMatchesOriginal()
         }
     }
 
@@ -273,8 +332,7 @@ Item {
                         const newIdx = engineModel.count - 1
                         engineList.currentIndex = newIdx
                         loadFormFromModel(newIdx)
-                        localChanges = true
-                        root.configurationChanged()
+                        unsavedChanges = true
                     }
                 }
 
@@ -294,8 +352,7 @@ Item {
                         } else {
                             currentIndex = -1
                         }
-                        localChanges = true
-                        root.configurationChanged()
+                        unsavedChanges = !modelMatchesOriginal()
                     }
                 }
             }
@@ -326,7 +383,7 @@ Item {
                 PC3.TextField {
                     id: nameField
                     Layout.fillWidth: true
-                    onTextChanged: if (!loading) { localChanges = true; root.configurationChanged() }
+                    onTextChanged: if (!loading) checkForChanges()
                 }
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2}
@@ -335,7 +392,7 @@ Item {
                 PC3.TextField {
                     id: urlField
                     Layout.fillWidth: true
-                    onTextChanged: if (!loading) { localChanges = true; root.configurationChanged() }
+                    onTextChanged: if (!loading) checkForChanges()
                 }
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2 }
@@ -347,7 +404,7 @@ Item {
                         id: iconField
                         Layout.fillWidth: true
                         placeholderText: i18nd("plasma_applet_babeleo","Theme name or file path")
-                        onTextChanged: if (!loading) { localChanges = true; root.configurationChanged() }
+                        onTextChanged: if (!loading) checkForChanges()
                     }
                     PC3.Button {
                         id: fetchButton
@@ -368,7 +425,7 @@ Item {
                 PC3.CheckBox {
                     id: hideBox
                     text: i18nd("plasma_applet_babeleo","Hide this search engine")
-                    onCheckedChanged: if (!loading) { localChanges = true; root.configurationChanged() }
+                    onCheckedChanged: if (!loading) checkForChanges()
                 }
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2 }
@@ -378,17 +435,13 @@ Item {
                     PC3.RadioButton {
                         id: mainMenuRadio
                         text: i18nd("plasma_applet_babeleo","Main menu")
-                        onCheckedChanged: if (!loading && checked) {
-                            localChanges = true; root.configurationChanged()
-                        }
+                        onCheckedChanged: if (!loading && checked) checkForChanges()
                     }
                     PC3.RadioButton {
                         id: otherRadio
                         Layout.leftMargin: Kirigami.Units.largeSpacing * 2
                         text: i18nd("plasma_applet_babeleo","More search engines submenu")
-                        onCheckedChanged: if (!loading && checked) {
-                            localChanges = true; root.configurationChanged()
-                        }
+                        onCheckedChanged: if (!loading && checked) checkForChanges()
                     }
                 }
             }
