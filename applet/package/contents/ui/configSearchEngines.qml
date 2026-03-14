@@ -13,7 +13,7 @@
  *   Edit form:   form fields → engineModel (via commitCurrentToModel())
  *   Switch item: commitCurrentToModel(), then loadFormFromModel(newIndex)
  *   Add/Delete:  engineModel only (no C++ calls)
- *   Fetch icon:  Plasmoid.self.fetchIcon() → async signal → saveEngine() directly
+ *   Fetch icon:  Plasmoid.self.fetchIcon() → async signal → update model + unsavedChanges
  *   Apply/OK:    saveConfig() → compare model with originalEngineNames →
  *                deleteEngine() for removed, saveEngine() for all current →
  *                rebuildAfterConfigChange()
@@ -226,25 +226,8 @@ Item {
                 iconField.text = iconPath
                 loading = false
             }
-            // Save the icon immediately to KConfig — no Apply click needed.
-            // The icon file is already on disk; we just persist the path reference.
-            for (let i = 0; i < engineModel.count; i++) {
-                const eng = engineModel.get(i)
-                if (eng.name === engineName) {
-                    Plasmoid.self.saveEngine(engineName, engineName, eng.url, iconPath,
-                                            eng.position, eng.hidden)
-                    // Also update the snapshot so this no longer counts as a change.
-                    for (let j = 0; j < originalSnapshot.length; j++) {
-                        if (originalSnapshot[j].name === engineName) {
-                            const s = originalSnapshot[j]
-                            originalSnapshot[j] = { name: s.name, url: s.url, icon: iconPath,
-                                                    position: s.position, hidden: s.hidden }
-                            break
-                        }
-                    }
-                    break
-                }
-            }
+            // The icon file is already on disk. The path reference will be saved
+            // to KConfig when the user clicks Apply or OK.
             unsavedChanges = !modelMatchesOriginal()
         }
     }
