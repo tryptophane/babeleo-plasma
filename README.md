@@ -141,10 +141,10 @@ kquitapp6 plasmashell && kstart plasmashell
 
 ## License
 
-GPL-2.0-or-later — see [COPYING](COPYING)
+GPL-2.0-or-later — see [LICENSE](LICENSE)
 
 ## Credits
 
 - Icon based on *Crystal Clear app babelfish* by Everaldo Coelho (LGPL)
 - Original KDE 4 concept by Pascal Pollet (2009)
-- Ported to KDE Plasma 6 (2025)
+- Ported to KDE Plasma 6 (2026) — most of the implementation by Claude Sonnet 4.6, directed by Pascal Pollet
