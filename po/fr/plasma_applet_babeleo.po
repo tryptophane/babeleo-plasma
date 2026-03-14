@@ -106,3 +106,7 @@ msgstr "Menu principal"
 #: applet/package/contents/ui/configSearchEngines.qml
 msgid "More search engines submenu"
 msgstr "Sous-menu « Autres moteurs de recherche »"
+
+#: applet/babeleo.cpp
+msgid "Open Babeleo manual query"
+msgstr "Ouvrir la recherche manuelle Babeleo"

@@ -130,6 +130,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void setEngineFromAction();   // connected to QAction::triggered() from the context menu
+    void onDbusShortcutPressed(const QString &component, const QString &shortcut, qlonglong timestamp);
 
 private:
     void createMenu();
@@ -143,5 +144,5 @@ private:
     QHash<QString, Babelengine *> m_enginesHash;
     QStringList m_enginesList;
     KConfigGroup m_configuration;
-    QAction *m_browseAction = nullptr;  // global shortcut action registered with KGlobalAccel
+    QAction *m_manualQueryAction = nullptr;  // global shortcut: open manual query popup
 };

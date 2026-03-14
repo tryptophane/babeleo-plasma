@@ -69,14 +69,26 @@ void Babeleo::init()
         setIcon(m_enginesHash.value(m_currentEngine)->getIcon());
     }
 
-    // Register a global shortcut with KGlobalAccel that calls browseWithClipboard().
-    // This is independent of Plasma's built-in "Activate widget" shortcut.
-    // The shortcut appears in System Settings → Shortcuts → Babeleo and can
-    // also be configured in our settings dialog via KKeySequenceWidget.
-    m_browseAction = new QAction(i18n("Translate clipboard content"), this);
-    m_browseAction->setObjectName(QStringLiteral("translate-clipboard"));
-    KGlobalAccel::setGlobalShortcut(m_browseAction, QKeySequence()); // no default shortcut
-    connect(m_browseAction, &QAction::triggered, this, &Babeleo::browseWithClipboard);
+    // Register a global shortcut for opening the manual query popup.
+    // Note: translating the clipboard is handled by the built-in "Activate widget as if clicked"
+    // shortcut (Plasma::Applet::setGlobalShortcut), configurable in the widget's Shortcuts tab.
+    m_manualQueryAction = new QAction(i18n("Open Babeleo manual query"), this);
+    m_manualQueryAction->setObjectName(QStringLiteral("manual-query"));
+    KGlobalAccel::setGlobalShortcut(m_manualQueryAction, QKeySequence()); // no default shortcut
+
+    // kglobalacceld activates the shortcut via two paths simultaneously:
+    // - invokeAction on plasmashell's KGlobalAccel D-Bus → triggers QAction::triggered()
+    // - globalShortcutPressed signal on the component object
+    // Using only the D-Bus signal path to avoid a double-emit (which would toggle the popup
+    // open and immediately closed again, making it appear as if nothing happened).
+    QDBusConnection::sessionBus().connect(
+        QStringLiteral("org.kde.kglobalaccel"),
+        QStringLiteral("/component/plasmashell"),
+        QStringLiteral("org.kde.kglobalaccel.Component"),
+        QStringLiteral("globalShortcutPressed"),
+        this,
+        SLOT(onDbusShortcutPressed(QString, QString, qlonglong))
+    );
 }
 
 void Babeleo::configChanged()
@@ -191,6 +203,14 @@ QList<QAction *> Babeleo::contextualActions()
 QString Babeleo::currentEngine() const
 {
     return m_currentEngine;
+}
+
+void Babeleo::onDbusShortcutPressed(const QString &component, const QString &shortcut, qlonglong timestamp)
+{
+    Q_UNUSED(timestamp)
+    if (component == QLatin1String("plasmashell") && shortcut == QLatin1String("manual-query")) {
+        Q_EMIT requestTogglePopup();
+    }
 }
 
 void Babeleo::setEngineFromAction()
@@ -338,8 +358,11 @@ void Babeleo::fetchIcon(const QString &engineName, const QString &pageUrl)
         }
         // Copy the favicon from the volatile KIO cache to a persistent location
         // so it survives cache cleanups.
-        const QString iconDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
-                                + QStringLiteral("/plasma/plasmoids/org.kde.plasma.babeleo/icons/");
+        // Store favicons under AppDataLocation, NOT under plasma/plasmoids/,
+        // because Plasma treats any directory under plasma/plasmoids/<id>/ as a
+        // local package override, which shadows the system installation.
+        const QString iconDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+                                + QStringLiteral("/babeleo/icons/");
         QDir().mkpath(iconDir);
         const QString srcPath  = job->iconFile();
         const QString destPath = iconDir + QFileInfo(srcPath).fileName();

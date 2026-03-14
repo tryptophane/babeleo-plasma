@@ -106,3 +106,7 @@ msgstr "Hauptmenü"
 #: applet/package/contents/ui/configSearchEngines.qml
 msgid "More search engines submenu"
 msgstr "Untermenü »Weitere Suchmaschinen«"
+
+#: applet/babeleo.cpp
+msgid "Open Babeleo manual query"
+msgstr "Babeleo-Abfragedialog öffnen"
