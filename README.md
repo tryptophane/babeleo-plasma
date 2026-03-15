@@ -41,6 +41,35 @@ Your browser handles all communication — Babeleo only opens a URL.
 
 ---
 
+## Keyboard shortcuts
+
+Babeleo exposes two independent keyboard shortcuts, both configurable without touching any config file.
+
+### Translate clipboard content (one-click shortcut)
+
+Right-click the applet → *Configure Babeleo…* → **Keyboard Shortcuts** tab.
+The entry *Activate widget as if clicked* triggers the same action as a left-click: reads the
+primary selection (or clipboard) and opens the current service in your browser.
+
+### Open the manual query dialog
+
+Right-click the applet → *Configure Babeleo…* → **Shortcuts** tab.
+The entry *Open manual query dialog* opens the text-input popup so you can type a search term
+directly.
+
+Both shortcuts are stored by KDE's global shortcut system and also appear in
+*System Settings → Shortcuts → Plasma Workspace* (search for **babeleo**).
+
+> **Why are there two shortcut pages in the settings dialog?**
+> Plasma 6 automatically adds a built-in *Keyboard Shortcuts* page to the settings dialog of
+> every applet — this page manages the *Activate widget* shortcut and cannot be removed or
+> replaced by the applet itself. The custom *Shortcuts* page is the one added by Babeleo to
+> configure the manual query shortcut. This is a Plasma framework limitation; consolidating
+> both into a single page would require replacing the entire settings dialog with a custom
+> implementation, which is a disproportionate amount of complexity for little gain.
+
+---
+
 ## Requirements
 
 | Dependency | Version |

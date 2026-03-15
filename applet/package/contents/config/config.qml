@@ -16,4 +16,9 @@ ConfigModel {
         icon: "internet-services"
         source: "configSearchEngines.qml"
     }
+    ConfigCategory {
+        name: i18nd("plasma_applet_babeleo", "Shortcuts")
+        icon: "preferences-desktop-keyboard"
+        source: "configShortcuts.qml"
+    }
 }

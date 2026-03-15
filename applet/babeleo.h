@@ -20,6 +20,7 @@
 #include <QAction>
 #include <QActionGroup>
 #include <QHash>
+#include <QKeySequence>
 #include <QStringList>
 #include <QVariantList>
 
@@ -51,6 +52,9 @@ class Babeleo : public Plasma::Applet
      *  Used in configSearchEngines.qml: Plasmoid.self.engineList() etc.
      */
     Q_PROPERTY(QObject *self READ self CONSTANT)
+
+    /** The current global shortcut for opening the manual query dialog. */
+    Q_PROPERTY(QKeySequence manualQueryShortcut READ manualQueryShortcut NOTIFY manualQueryShortcutChanged)
 
 public:
     // Plasma 6 constructor signature: KPluginMetaData instead of QVariantList as second parameter
@@ -121,6 +125,12 @@ public:
     /** Sets the current engine by name. Called from QML engine selector. */
     Q_INVOKABLE void setEngine(const QString &name);
 
+    /** Returns the current global shortcut for the manual query action. */
+    QKeySequence manualQueryShortcut() const;
+
+    /** Updates the global shortcut for the manual query action. Called from QML config page. */
+    Q_INVOKABLE void setManualQueryShortcut(const QKeySequence &shortcut);
+
 Q_SIGNALS:
     void currentEngineChanged();
 
@@ -136,6 +146,7 @@ Q_SIGNALS:
 
     /** After saveEngine/deleteEngine: the config UI should refresh itself. */
     void enginesChanged();
+    void manualQueryShortcutChanged();
 
 private Q_SLOTS:
     void setEngineFromAction();   // connected to QAction::triggered() from the context menu
@@ -154,4 +165,5 @@ private:
     QStringList m_enginesList;
     KConfigGroup m_configuration;
     QAction *m_manualQueryAction = nullptr;  // global shortcut: open manual query popup
+    QKeySequence m_manualQueryShortcutCache; // local cache to avoid KGlobalAccel D-Bus timing race
 };
