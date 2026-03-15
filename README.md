@@ -7,6 +7,8 @@ else you can reach with a URL.
 
 ![Babeleo in action](https://github.com/tryptophane/babeleo-plasma/raw/main/screenshot.png)
 
+![Babeleo on the desktop](https://github.com/tryptophane/babeleo-plasma/raw/main/babeleo-desktop-applet.png)
+
 ---
 
 ## Features
