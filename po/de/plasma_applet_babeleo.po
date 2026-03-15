@@ -118,3 +118,15 @@ msgstr "Untermenü »Weitere Suchmaschinen«"
 #: applet/babeleo.cpp
 msgid "Open Babeleo manual query"
 msgstr "Babeleo-Abfragedialog öffnen"
+
+#: applet/package/contents/config/config.qml
+msgid "Shortcuts"
+msgstr "Kurzbefehle"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "Manual Query Shortcut"
+msgstr "Kurzbefehl für manuelle Abfrage"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "Open manual query dialog:"
+msgstr "Dialog für manuelle Abfrage öffnen:"

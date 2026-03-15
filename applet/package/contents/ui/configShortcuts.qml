@@ -16,20 +16,33 @@ Item {
         unsavedChanges = false
     }
 
-    Kirigami.FormLayout {
+    ColumnLayout {
         anchors {
             top: parent.top
             left: parent.left
             right: parent.right
         }
+        spacing: 0
 
-        KeySequenceItem {
-            id: shortcutItem
-            Kirigami.FormData.label: i18nd("plasma_applet_babeleo", "Open manual query dialog:")
-            keySequence: Plasmoid.self.manualQueryShortcut
-            patterns: ShortcutPattern.Modifier | ShortcutPattern.ModifierAndKey
-            onKeySequenceModified: {
-                unsavedChanges = (keySequence.toString() !== Plasmoid.self.manualQueryShortcut.toString())
+        Kirigami.Heading {
+            Layout.topMargin: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+            Layout.bottomMargin: Kirigami.Units.largeSpacing *3
+            Layout.leftMargin: Kirigami.Units.largeSpacing * 2
+            level: 1
+            text: i18nd("plasma_applet_babeleo", "Manual Query Shortcut")
+        }
+
+        Kirigami.FormLayout {
+            Layout.fillWidth: true
+
+            KeySequenceItem {
+                id: shortcutItem
+                Kirigami.FormData.label: i18nd("plasma_applet_babeleo", "Open manual query dialog:")
+                keySequence: Plasmoid.self.manualQueryShortcut
+                patterns: ShortcutPattern.Modifier | ShortcutPattern.ModifierAndKey
+                onKeySequenceModified: {
+                    unsavedChanges = (keySequence.toString() !== Plasmoid.self.manualQueryShortcut.toString())
+                }
             }
         }
     }
