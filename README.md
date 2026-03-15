@@ -6,14 +6,18 @@ Works with translation services, dictionaries, encyclopedias, search engines, an
 else you can reach with a URL.
 
 ![Babeleo in action](https://github.com/tryptophane/babeleo-plasma/raw/main/screenshot.png)
+Babeleos panel icon with context menu, the settings dialog and the desktop applet
 
-![Babeleo on the desktop](https://github.com/tryptophane/babeleo-plasma/raw/main/babeleo-desktop-applet.png)
+---
+
+![Babeleo on the desktop](https://github.com/tryptophane/babeleo-plasma/raw/main/babeleo-desktop-applet.png)  
+Manual query dialog, open it through the context menu or by a keyboard shortcut that can be configured in the KDE system settings
 
 ---
 
 ## Features
 
-- **One-click lookup**: select text with the mouse, click the icon → browser opens the result
+- **One-click lookup**: select text with the mouse, click the icon or press the keyboard shortcut → browser opens the result
 - **Manual query**: enter a search term directly in the applet's popup dialog
 - **Global keyboard shortcut**: configurable shortcut for hands-free use
 - **Fully configurable services**: add, edit, remove any engine — point it at any URL that accepts a query string
