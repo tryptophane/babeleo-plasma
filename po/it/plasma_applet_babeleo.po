@@ -1,0 +1,132 @@
+# Italian translations for Babeleo Plasma applet.
+# Copyright (C) 2024 Pascal Pollet
+# This file is distributed under the same license as the babeleo package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: babeleo 0.6.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-01-01 00:00+0100\n"
+"Last-Translator: Pascal Pollet <paspol@gmx.de>\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet/babeleo.cpp
+msgid "Translate clipboard content"
+msgstr "Traduci contenuto degli appunti"
+
+#: applet/babeleo.cpp
+msgid "More search engines"
+msgstr "Altri motori di ricerca"
+
+#: applet/babeleo.cpp
+msgid "Manual query..."
+msgstr "Ricerca manuale..."
+
+#: applet/babeleo.cpp
+msgid "A search engine with this name already exists."
+msgstr "Esiste già un motore di ricerca con questo nome."
+
+#: applet/package/contents/ui/main.qml
+msgid "Babeleo Translator"
+msgstr "Babeleo (traduttore)"
+
+#: applet/package/contents/ui/main.qml
+msgid "Current engine: %1"
+msgstr "Motore corrente: %1"
+
+#: applet/package/contents/ui/main.qml
+msgid "Translate clipboard content\nCurrent engine: %1"
+msgstr "Traduci contenuto degli appunti\nMotore corrente: %1"
+
+#: applet/package/contents/ui/main.qml
+msgid "Enter search term…"
+msgstr "Inserisci termine di ricerca…"
+
+#: applet/package/contents/ui/main.qml
+msgid "Cancel"
+msgstr "Annulla"
+
+#: applet/package/contents/ui/main.qml
+msgid "Search"
+msgstr "Cerca"
+
+#: applet/package/contents/config/config.qml
+msgid "Search Engines"
+msgstr "Motori di ricerca"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Fetch Icon"
+msgstr "Scarica icona"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Downloading…"
+msgstr "Download in corso…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Add"
+msgstr "Aggiungi"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "New Engine"
+msgstr "Nuovo motore"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Delete"
+msgstr "Elimina"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Name:"
+msgstr "Nome:"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "URL (%s = search term):"
+msgstr "URL (%s = termine di ricerca):"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Icon:"
+msgstr "Icona:"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Theme name or file path"
+msgstr "Nome del tema o percorso file"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Visibility:"
+msgstr "Visibilità:"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Hide this search engine"
+msgstr "Nascondi questo motore di ricerca"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Position:"
+msgstr "Posizione:"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Main menu"
+msgstr "Menu principale"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "More search engines submenu"
+msgstr "Sottomenu «Altri motori di ricerca»"
+
+#: applet/babeleo.cpp
+msgid "Open Babeleo manual query"
+msgstr "Apri ricerca manuale Babeleo"
+
+#: applet/package/contents/config/config.qml
+msgid "Shortcuts"
+msgstr "Scorciatoie"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "Manual Query Shortcut"
+msgstr "Scorciatoia ricerca manuale"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "Open manual query dialog:"
+msgstr "Apri finestra di ricerca manuale:"
