@@ -99,10 +99,16 @@ void Babeleo::init()
     m_manualQueryAction->setObjectName(QStringLiteral("manual-query"));
     KGlobalAccel::setGlobalShortcut(m_manualQueryAction, QKeySequence()); // no default shortcut
 
-    // Initialise the local cache from whatever is currently stored in kglobalshortcutsrc.
-    // This makes manualQueryShortcut() independent of KGlobalAccel D-Bus round-trips.
-    const auto currentShortcuts = KGlobalAccel::self()->shortcut(m_manualQueryAction);
-    m_manualQueryShortcutCache = currentShortcuts.isEmpty() ? QKeySequence() : currentShortcuts.first();
+    // Restore shortcut from applet config (persists across plasmashell restarts independently
+    // of kglobalshortcutsrc, which NoAutoloading never writes to).
+    const QString savedShortcut = m_configuration.readEntry("manualQueryShortcut", QString());
+    if (!savedShortcut.isEmpty()) {
+        m_manualQueryShortcutCache = QKeySequence(savedShortcut);
+        KGlobalAccel::self()->setShortcut(m_manualQueryAction, {m_manualQueryShortcutCache}, KGlobalAccel::NoAutoloading);
+    } else {
+        const auto currentShortcuts = KGlobalAccel::self()->shortcut(m_manualQueryAction);
+        m_manualQueryShortcutCache = currentShortcuts.isEmpty() ? QKeySequence() : currentShortcuts.first();
+    }
 
     // kglobalacceld activates the shortcut via two paths simultaneously:
     // - invokeAction on plasmashell's KGlobalAccel D-Bus → triggers QAction::triggered()
@@ -617,6 +623,10 @@ void Babeleo::setManualQueryShortcut(const QKeySequence &shortcut)
     // Update the local cache immediately so manualQueryShortcut() returns the
     // new value before the KGlobalAccel D-Bus round-trip completes.
     m_manualQueryShortcutCache = shortcut;
+    // Persist to applet config so the shortcut survives plasmashell restarts.
+    // (NoAutoloading never writes to kglobalshortcutsrc.)
+    m_configuration.writeEntry("manualQueryShortcut", shortcut.toString());
+    Q_EMIT configNeedsSaving();
     Q_EMIT manualQueryShortcutChanged();
 }
 
