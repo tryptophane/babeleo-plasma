@@ -54,7 +54,6 @@ static QIcon iconFromValue(const QString &iconValue)
 Babeleo::Babeleo(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
 {
-    KLocalizedString::setApplicationDomain("plasma_applet_babeleo");
 }
 
 Babeleo::~Babeleo()
@@ -96,7 +95,7 @@ void Babeleo::init()
     // Register a global shortcut for opening the manual query popup.
     // Note: translating the clipboard is handled by the built-in "Activate widget as if clicked"
     // shortcut (Plasma::Applet::setGlobalShortcut), configurable in the widget's Shortcuts tab.
-    m_manualQueryAction = new QAction(i18n("Open Babeleo manual query"), this);
+    m_manualQueryAction = new QAction(i18nd("plasma_applet_babeleo", "Open Babeleo manual query"), this);
     m_manualQueryAction->setObjectName(QStringLiteral("manual-query"));
     KGlobalAccel::setGlobalShortcut(m_manualQueryAction, QKeySequence()); // no default shortcut
 
@@ -178,7 +177,7 @@ void Babeleo::createMenu()
 
     std::sort(sortedNames.begin(), sortedNames.end());
 
-    QMenu *otherMenu = new QMenu(i18n("More search engines"));
+    QMenu *otherMenu = new QMenu(i18nd("plasma_applet_babeleo", "More search engines"));
 
     for (const QString &name : std::as_const(sortedNames)) {
         Babelengine *eng = m_enginesHash.value(name);
@@ -206,7 +205,7 @@ void Babeleo::createMenu()
     }
 
     if (!otherMenu->isEmpty()) {
-        QAction *otherAction = new QAction(i18n("More search engines"), this);
+        QAction *otherAction = new QAction(i18nd("plasma_applet_babeleo", "More search engines"), this);
         otherAction->setMenu(otherMenu);
         m_actions.append(otherAction);
     } else {
@@ -217,7 +216,7 @@ void Babeleo::createMenu()
     separator->setSeparator(true);
     m_actions.append(separator);
 
-    QAction *manualQueryAction = new QAction(i18n("Manual query..."), this);
+    QAction *manualQueryAction = new QAction(i18nd("plasma_applet_babeleo", "Manual query..."), this);
     connect(manualQueryAction, &QAction::triggered, this, [this]() {
         Q_EMIT requestTogglePopup();
     });
@@ -437,7 +436,7 @@ void Babeleo::saveEngine(const QString &oldName, const QString &newName,
                          const QString &position, bool hidden)
 {
     if (oldName != newName && m_enginesHash.contains(newName)) {
-        KMessageBox::error(nullptr, i18n("A search engine with this name already exists."));
+        KMessageBox::error(nullptr, i18nd("plasma_applet_babeleo", "A search engine with this name already exists."));
         return;
     }
 

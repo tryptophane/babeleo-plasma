@@ -23,7 +23,7 @@ Manual query dialog, open it through the context menu or by a keyboard shortcut 
 - **Fully configurable services**: add, edit, remove any engine — point it at any URL that accepts a query string
 - **Automatic favicon download**: each service displays its website icon
 - **Context menu**: quickly switch between services, organize them into main menu and submenu
-- **Desktop widget**: can also be added to the desktop — clipboard support is not available in that mode, but manual queries work fully
+- **Desktop widget**: can also be added to the desktop — one-click lookup and keyboard shortcuts work fully; the manual query dialog is not available in this mode
 
 ## Built-in services (all configurable)
 
