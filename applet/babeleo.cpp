@@ -26,6 +26,8 @@
 #include <QStandardPaths>
 #include <QUrl>
 
+#include <KConfig>
+#include <KConfigGroup>
 #include <KGlobalAccel>
 #include <KLocalizedString>
 #include <KIO/FavIconRequestJob>
@@ -57,6 +59,28 @@ Babeleo::Babeleo(QObject *parent, const KPluginMetaData &data, const QVariantLis
 
 Babeleo::~Babeleo()
 {
+    if (m_manualQueryAction) {
+        KGlobalAccel::self()->removeAllShortcuts(m_manualQueryAction);
+    }
+
+    // Remove the "activate widget N" global shortcut entry that Plasma registers
+    // for each applet instance but does not clean up when the applet is removed.
+    const QString activateKey = QStringLiteral("activate widget %1").arg(id());
+    KConfig kgrc(QStringLiteral("kglobalshortcutsrc"), KConfig::NoGlobals);
+    KConfigGroup group = kgrc.group(QStringLiteral("plasmashell"));
+    if (group.hasKey(activateKey)) {
+        group.deleteEntry(activateKey);
+        kgrc.sync();
+        // Tell kglobalaccel to drop the in-memory entry as well.
+        QDBusConnection::sessionBus().call(
+            QDBusMessage::createMethodCall(
+                QStringLiteral("org.kde.kglobalaccel"),
+                QStringLiteral("/component/plasmashell"),
+                QStringLiteral("org.kde.kglobalaccel.Component"),
+                QStringLiteral("cleanUp")),
+            QDBus::NoBlock);
+    }
+
     qDeleteAll(m_enginesHash);
 }
 
