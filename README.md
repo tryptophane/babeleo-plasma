@@ -4,13 +4,10 @@ A KDE Plasma 6 applet to query any web service with the clipboard content or typ
 Select text with the mouse, click the icon — your browser opens the result directly.
 Works with translation services, dictionaries, encyclopedias, search engines, and anything
 else you can reach with a URL.
-
-![Babeleo in action](https://github.com/tryptophane/babeleo-plasma/raw/main/screenshot.png)
+<img width="2057" height="1136" alt="Babeleo - At A Glance" src="https://github.com/user-attachments/assets/b1f08d1a-6a18-4ea0-9e6f-f8dbe5e2f968" />  
 Babeleos panel icon with context menu, the settings dialog and the desktop applet
 
----
-
-![Babeleo on the desktop](https://github.com/tryptophane/babeleo-plasma/raw/main/babeleo-desktop-applet.png)  
+<img width="702" height="259" alt="Babeleo - Manual Query" src="https://github.com/user-attachments/assets/c79e0701-c567-4670-b19a-765e683d131c" />  
 Manual query dialog, open it through the context menu or by a keyboard shortcut
 
 ---
@@ -23,7 +20,7 @@ Manual query dialog, open it through the context menu or by a keyboard shortcut
 - **Fully configurable services**: add, edit, remove any engine — point it at any URL that accepts a query string
 - **Automatic favicon download**: each service displays its website icon
 - **Context menu**: quickly switch between services, organize them into main menu and submenu
-- **Desktop widget**: can also be added to the desktop — one-click lookup and keyboard shortcuts work fully; the manual query dialog is not available in this mode
+- **Desktop widget**: can also be added to the desktop — query clipboard content with your keyboard shortcut or make a manual query. Choose your search engine in the dropdown
 
 ## Built-in services (all configurable)
 
@@ -31,13 +28,14 @@ The applet ships with a set of example services to get you started. You can add,
 remove or change all of them freely — none are mandatory:
 
 - **Translation**: Google Translate, Linguee, leo.org (DE↔EN/FR/ES/IT/ZH)
-- **Search**: Google, DuckDuckGo, Amazon (DE)
+- **Search**: Google, DuckDuckGo, ArchWiki
 - **Encyclopedias**: Wikipedia (DE, EN), Wiktionary (EN)
 - **Dictionaries**: Duden (DE), Cambridge Dictionary (EN-DE), Collins (EN-DE), dict.cc, Merriam-Webster (EN), Real Academia Española (ES)
 - **Other**: Google Maps, PubMed (medical literature)
 
 No data is ever sent to any service without an explicit user action (clicking).
 Your browser handles all communication — Babeleo only opens a URL.
+The developper is not affiliated with any of these services.
 
 ---
 
