@@ -1,6 +1,6 @@
 # Babeleo — KDE Plasma 6 Quick Translation and Search Applet
 
-A KDE Plasma 6 applet to query any web service with the clipboard content or typed text. The fastest way to translate or query any text on your desktop!
+A KDE Plasma 6 applet to query any web service with the clipboard content or typed text. The fastest way to translate or query any text on your desktop!  
 Select text with the mouse, click the icon — your browser opens the result directly.
 Works with translation services, dictionaries, encyclopedias, search engines, and anything
 else you can reach with a URL.
