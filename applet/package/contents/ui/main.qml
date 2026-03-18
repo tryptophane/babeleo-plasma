@@ -279,11 +279,16 @@ PlasmoidItem {
             }
         }
 
-        // When the popup becomes visible, set focus to the text field
-        onVisibleChanged: {
-            if (visible) {
-                queryField.text = ""
-                queryField.forceActiveFocus()
+        // In Plasma 6, the fullRepresentation's visible property is never toggled —
+        // Plasma manages visibility at the container level. The correct hook is
+        // PlasmoidItem.expanded, which reliably fires when the popup opens or closes.
+        Connections {
+            target: root
+            function onExpandedChanged() {
+                if (root.expanded) {
+                    queryField.text = ""
+                    queryField.forceActiveFocus()
+                }
             }
         }
 
