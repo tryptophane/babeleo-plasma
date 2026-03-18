@@ -87,6 +87,20 @@ public:
     Q_INVOKABLE void browseWithClipboard();
 
     /**
+     * "Click & forget": reads the clipboard and opens the given engine without
+     * changing the currently selected engine. Called from QML on Ctrl+Click
+     * (ComboBox delegate) and from setEngineFromAction() on Ctrl+Click in the
+     * context menu.
+     */
+    Q_INVOKABLE void browseWithClipboardOnEngine(const QString &engineName);
+
+    /**
+     * Returns true if Ctrl is currently held. Used from QML's onActivated to
+     * detect Ctrl+Click in the ComboBox without needing event interception.
+     */
+    Q_INVOKABLE bool isCtrlHeld() const;
+
+    /**
      * Opens the current search engine with the given text.
      * Called from the manual search dialog (popup).
      */
@@ -155,6 +169,7 @@ private Q_SLOTS:
 private:
     void createMenu();
     void openUrl(const QString &engineName, const QString &query);
+    QString readClipboard();   // shared by browseWithClipboard() and browseWithClipboardOnEngine()
     void populateEngines();
     void saveEnginesToConfig();
 

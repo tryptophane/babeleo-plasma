@@ -37,7 +37,11 @@ PlasmoidItem {
     activationTogglesExpanded: false
 
     toolTipMainText: i18nd("plasma_applet_babeleo", "Babeleo Translator")
+    toolTipTextFormat: Text.RichText
     toolTipSubText: i18nd("plasma_applet_babeleo", "Current engine: %1", root.plasmoid.currentEngine)
+                    + "<br><font color='" + Kirigami.Theme.disabledTextColor + "'>"
+                    + i18nd("plasma_applet_babeleo", "Ctrl+Click an engine to search without switching")
+                    + "</font>"
 
     // Set to true during onActivated handling to block Plasma's setExpanded(true),
     // which is called AFTER the activated() signal is emitted (not before).
@@ -159,6 +163,9 @@ PlasmoidItem {
                     delegate: PlasmaComponents3.ItemDelegate {
                         width: engineCombo.popup.width
                         highlighted: engineCombo.currentIndex === index
+                        PlasmaComponents3.ToolTip.text: i18nd("plasma_applet_babeleo", "Ctrl+Click to search without switching engine")
+                        PlasmaComponents3.ToolTip.visible: hovered
+                        PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
                         contentItem: RowLayout {
                             spacing: Kirigami.Units.smallSpacing
                             // Use model.name (a reactive ListModel role) to look up the icon.
@@ -187,7 +194,24 @@ PlasmoidItem {
                     }
                     onActivated: function(idx) {
                         if (idx >= 0 && idx < engineModel.count) {
-                            root.plasmoid.setEngine(engineModel.get(idx).name)
+                            var name = engineModel.get(idx).name
+                            if (root.plasmoid.isCtrlHeld()) {
+                                // Ctrl+Click: "click & forget" — search without switching engine.
+                                root.plasmoid.browseWithClipboardOnEngine(name)
+                                // ComboBox internally wrote currentIndex = idx, breaking our
+                                // binding. Restore it to the actual current engine.
+                                var current = root.plasmoid.currentEngine
+                                Qt.callLater(function() {
+                                    for (var i = 0; i < engineModel.count; i++) {
+                                        if (engineModel.get(i).name === current) {
+                                            engineCombo.currentIndex = i
+                                            return
+                                        }
+                                    }
+                                })
+                            } else {
+                                root.plasmoid.setEngine(name)
+                            }
                         }
                     }
                 }
@@ -201,7 +225,6 @@ PlasmoidItem {
 
                 PlasmaComponents3.ToolButton {
                     icon.name: "configure"
-                    display: AbstractButton.IconOnly
                     visible: Plasmoid.formFactor === 0
                     PlasmaComponents3.ToolTip.text: i18nd("plasma_applet_babeleo", "Configure Babeleo…")
                     PlasmaComponents3.ToolTip.visible: hovered

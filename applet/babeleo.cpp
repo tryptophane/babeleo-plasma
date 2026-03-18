@@ -273,7 +273,16 @@ void Babeleo::setEngineFromAction()
     if (!senderAction) {
         return;
     }
-    setEngine(senderAction->data().toString());
+    const QString engineName = senderAction->data().toString();
+    // Ctrl+Click: "click & forget" — search without switching the active engine.
+    // Use keyboardModifiers() (cached Qt event state) rather than queryKeyboardModifiers()
+    // (live OS query), because on Wayland the popup surface may no longer have keyboard
+    // focus by the time the slot runs, making the live query return 0.
+    if (QGuiApplication::keyboardModifiers() & Qt::ControlModifier) {
+        browseWithClipboardOnEngine(engineName);
+        return;
+    }
+    setEngine(engineName);
 }
 
 void Babeleo::openUrl(const QString &engineName, const QString &query)
@@ -313,7 +322,7 @@ void Babeleo::openUrl(const QString &engineName, const QString &query)
     }
 }
 
-void Babeleo::browseWithClipboard()
+QString Babeleo::readClipboard()
 {
     // Priority for the search term:
     // 1. Primary Selection (mouse selection) via Qt directly
@@ -373,7 +382,24 @@ void Babeleo::browseWithClipboard()
         query = QGuiApplication::clipboard()->text(QClipboard::Clipboard);
     }
 
-    openUrl(m_currentEngine, query);
+    return query;
+}
+
+void Babeleo::browseWithClipboard()
+{
+    openUrl(m_currentEngine, readClipboard());
+}
+
+bool Babeleo::isCtrlHeld() const
+{
+    return QGuiApplication::keyboardModifiers() & Qt::ControlModifier;
+}
+
+void Babeleo::browseWithClipboardOnEngine(const QString &engineName)
+{
+    // "Click & forget": search on a specific engine without changing the
+    // currently selected engine.
+    openUrl(engineName, readClipboard());
 }
 
 void Babeleo::browseWithText(const QString &text)

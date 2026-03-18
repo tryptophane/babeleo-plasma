@@ -130,3 +130,11 @@ msgstr "Raccourci pour la recherche manuelle"
 #: applet/package/contents/ui/configShortcuts.qml
 msgid "Open manual query dialog:"
 msgstr "Ouvrir le dialogue de recherche manuelle :"
+
+#: applet/package/contents/ui/main.qml
+msgid "Ctrl+Click an engine to search without switching"
+msgstr "Ctrl+Clic sur un moteur pour rechercher sans changer"
+
+#: applet/package/contents/ui/main.qml
+msgid "Ctrl+Click to search without switching engine"
+msgstr "Ctrl+Clic pour rechercher sans changer de moteur"

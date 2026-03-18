@@ -130,3 +130,11 @@ msgstr "手动查询快捷键"
 #: applet/package/contents/ui/configShortcuts.qml
 msgid "Open manual query dialog:"
 msgstr "打开手动查询对话框："
+
+#: applet/package/contents/ui/main.qml
+msgid "Ctrl+Click an engine to search without switching"
+msgstr "按住 Ctrl 单击引擎以搜索而不切换"
+
+#: applet/package/contents/ui/main.qml
+msgid "Ctrl+Click to search without switching engine"
+msgstr "按住 Ctrl 单击以搜索而不切换引擎"

@@ -1,16 +1,18 @@
 # Babeleo — KDE Plasma 6 Quick Translation and Search Applet
 
+#### 🎉 **Finally!** The good old Babeleo Translator plasmoid is back in it's new Qt6 dress!
+
 A KDE Plasma 6 applet to query any web service with the clipboard content or typed text. The fastest way to translate or query any text on your desktop!  
 Select text with the mouse, click the icon — your browser opens the result directly.
 Works with translation services, dictionaries, encyclopedias, search engines, and anything
 else you can reach with a URL.
 
-<img width="2057" height="1136" alt="Babeleo - At A Glance" src="https://github.com/user-attachments/assets/b1f08d1a-6a18-4ea0-9e6f-f8dbe5e2f968" />  
-Babeleos panel icon with context menu, the settings dialog and the desktop applet
+<img alt="Babeleo - At A Glance" src="https://github.com/user-attachments/assets/b1f08d1a-6a18-4ea0-9e6f-f8dbe5e2f968" />  
+Babeleos panel icon with context menu, the settings dialog and the desktop applet  
 
----
+---  
 
-<img width="702" height="259" alt="Babeleo - Manual Query" src="https://github.com/user-attachments/assets/c79e0701-c567-4670-b19a-765e683d131c" />
+<img alt="Babeleo - Manual Query" src="https://github.com/user-attachments/assets/c79e0701-c567-4670-b19a-765e683d131c" />
 
 Manual query dialog, open it through the context menu or by a keyboard shortcut
 
@@ -25,6 +27,7 @@ Manual query dialog, open it through the context menu or by a keyboard shortcut
 - **Automatic favicon download**: each service displays its website icon
 - **Context menu**: quickly switch between services, organize them into main menu and submenu
 - **Desktop widget**: can also be added to the desktop — query clipboard content with your keyboard shortcut or make a manual query. Choose your search engine in the dropdown
+- **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to search with the clipboard content without changing your current engine ("click & forget")
 
 ## Built-in services (all configurable)
 

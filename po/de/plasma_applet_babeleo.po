@@ -130,3 +130,11 @@ msgstr "Kurzbefehl für manuelle Abfrage"
 #: applet/package/contents/ui/configShortcuts.qml
 msgid "Open manual query dialog:"
 msgstr "Dialog für manuelle Abfrage öffnen:"
+
+#: applet/package/contents/ui/main.qml
+msgid "Ctrl+Click an engine to search without switching"
+msgstr "Strg+Klick auf eine Suchmaschine sucht ohne zu wechseln"
+
+#: applet/package/contents/ui/main.qml
+msgid "Ctrl+Click to search without switching engine"
+msgstr "Strg+Klick sucht ohne Suchmaschine zu wechseln"
