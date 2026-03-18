@@ -1,10 +1,10 @@
 # Changelog
 
-## 0.7.0 (2026)
+## 0.7.0 (18.03.2026)
 
 - **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to instantly search with the clipboard content, without changing your current engine ("click & forget").
 - Tooltip on each engine in the dropdown hints at the Ctrl+Click shortcut.
-- The text field of the manually query dialog is now coorectly resetted when the dialog opens
+- The text field of the manual query dialog is now correctly reset when the dialog opens.
 
 ## 0.6.0 (2026)
 
