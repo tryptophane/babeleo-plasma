@@ -6,7 +6,7 @@
 - Tooltip on each engine in the dropdown hints at the Ctrl+Click shortcut.
 - The text field of the manual query dialog is now correctly reset when the dialog opens.
 
-## 0.6.0 (2026)
+## 0.6.0 (16.03.2026)
 
 Complete rewrite for **KDE Plasma 6 / Qt 6**. The applet is fully functional again after over a decade.
 
