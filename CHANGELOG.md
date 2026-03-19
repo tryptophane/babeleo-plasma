@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1 (19.03.2026)
+
+- Fix some ctrl + click related bugs
+
 ## 0.7.0 (18.03.2026)
 
 - **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to instantly search with the clipboard content, without changing your current engine ("click & forget").
