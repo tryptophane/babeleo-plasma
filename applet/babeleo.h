@@ -174,6 +174,7 @@ private:
     void saveEnginesToConfig();
 
     QString m_currentEngine;
+    QString m_menuClipboardCache; // clipboard snapshot taken when context menu opens
     QActionGroup *m_langChoices = nullptr;
     QList<QAction *> m_actions;
     QHash<QString, Babelengine *> m_enginesHash;

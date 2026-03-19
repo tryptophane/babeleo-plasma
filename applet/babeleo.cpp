@@ -235,6 +235,10 @@ void Babeleo::createMenu()
 
 QList<QAction *> Babeleo::contextualActions()
 {
+    // Snapshot the clipboard now, while the primary selection is still valid.
+    // If the user navigates into a submenu, mouse movement can invalidate the
+    // Wayland primary selection before the action slot fires.
+    m_menuClipboardCache = readClipboard();
     return m_actions;
 }
 
@@ -279,7 +283,15 @@ void Babeleo::setEngineFromAction()
     // (live OS query), because on Wayland the popup surface may no longer have keyboard
     // focus by the time the slot runs, making the live query return 0.
     if (QGuiApplication::keyboardModifiers() & Qt::ControlModifier) {
-        browseWithClipboardOnEngine(engineName);
+        // Use the clipboard snapshot taken when the menu opened — the primary
+        // selection may have been lost during submenu navigation.
+        openUrl(engineName, m_menuClipboardCache);
+        // QActionGroup already moved the checkmark to the clicked action before this
+        // slot ran. Restore it to the actual current engine.
+        const auto actions = m_langChoices->actions();
+        for (QAction *a : actions) {
+            a->setChecked(a->data().toString() == m_currentEngine);
+        }
         return;
     }
     setEngine(engineName);
