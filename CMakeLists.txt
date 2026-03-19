@@ -15,18 +15,12 @@ set(KF6_MIN_VERSION "6.0.0")
 find_package(ECM 6.0.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-# IMPORTANT: Qt6 must be found BEFORE include(KDEInstallDirs)!
-# KDEInstallDirs uses ecm_query_qt() to determine the plugin installation path
-# (e.g. /usr/lib/qt6/plugins). This only works if Qt6::qmake is already known
-# as a CMake target.
-# Wrong order → KDEInstallDirs falls back to the Qt5 path /usr/lib/qt!
-find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets DBus)
-
-# Include KDE standard CMake settings (AFTER find_package(Qt6)!)
 include(KDEInstallDirs)       # Defines ${KDE_INSTALL_PLUGINDIR} etc.
 include(KDECMakeSettings)     # Standard compile flags
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(FeatureSummary)       # Prints a summary of all found packages at the end
+
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets DBus)
 
 # KDE Frameworks 6 components
 find_package(KF6 REQUIRED COMPONENTS

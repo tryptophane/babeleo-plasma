@@ -85,10 +85,6 @@ Both shortcuts are stored by KDE's global shortcut system and also appear in
 | CMake | ≥ 3.22 |
 | Extra CMake Modules (ECM) | ≥ 6.0 |
 
-**Optional runtime dependency:**
-- `wl-clipboard` — enables reading mouse-selected text on Wayland without pressing Ctrl+C.
-  Without it, Babeleo falls back to the regular clipboard (Ctrl+C content).
-
 ---
 
 ## Build & Install
@@ -118,11 +114,9 @@ kquitapp6 plasmashell && kstart plasmashell
 
 **Arch Linux / Manjaro:**
 ```bash
-sudo pacman -S cmake extra-cmake-modules plasma-framework \
-    qt6-base kf6-ki18n kf6-kio kf6-kcoreaddons kf6-kconfig \
-    kf6-kglobalaccel kf6-kwidgetsaddons kf6-kxmlgui kf6-kwindowsystem
-# Optional:
-sudo pacman -S wl-clipboard
+sudo pacman -S cmake extra-cmake-modules libplasma \
+    qt6-base ki18n kio kcoreaddons kconfig \
+    kglobalaccel kwidgetsaddons kxmlgui kwindowsystem wl-clipboard
 ```
 
 **KDE Neon / Ubuntu with Plasma 6:**
@@ -130,9 +124,7 @@ sudo pacman -S wl-clipboard
 sudo apt install cmake extra-cmake-modules libplasma-dev qt6-base-dev \
     libkf6coreaddons-dev libkf6i18n-dev libkf6config-dev \
     libkf6globalaccel-dev libkf6kio-dev libkf6widgetsaddons-dev \
-    libkf6xmlgui-dev libkf6windowsystem-dev
-# Optional:
-sudo apt install wl-clipboard
+    libkf6xmlgui-dev libkf6windowsystem-dev wl-clipboard
 ```
 
 **Fedora:**
@@ -140,9 +132,7 @@ sudo apt install wl-clipboard
 sudo dnf install cmake extra-cmake-modules plasma-devel qt6-qtbase-devel \
     kf6-kcoreaddons-devel kf6-ki18n-devel kf6-kconfig-devel \
     kf6-kglobalaccel-devel kf6-kio-devel kf6-kwidgetsaddons-devel \
-    kf6-kxmlgui-devel kf6-kwindowsystem-devel
-# Optional:
-sudo dnf install wl-clipboard
+    kf6-kxmlgui-devel kf6-kwindowsystem-devel wl-clipboard
 ```
 
 ---
