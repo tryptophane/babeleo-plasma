@@ -2,6 +2,10 @@
 
 ## 0.7.2 (20.03.2026)
 
+- Fixed version in metadata.json
+
+## 0.7.2 (20.03.2026)
+
 - Added hint in README to the new AUR package for Arch Linux users
 - Renamed icon files to meet conventions 
 - Fixed compilation warnings when building AUR package
