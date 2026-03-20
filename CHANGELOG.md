@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.7.2 (20.03.2026)
+## 0.7.3 (20.03.2026)
 
 - Fixed version in metadata.json
 
