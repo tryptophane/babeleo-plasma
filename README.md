@@ -4,8 +4,7 @@
 
 A KDE Plasma 6 applet to query any web service with the clipboard content or typed text. The fastest way to translate or query any text on your desktop!  
 Select text with the mouse, click the icon — your browser opens the result directly.
-Works with translation services, dictionaries, encyclopedias, search engines, and anything
-else you can reach with a URL.
+Works with translation services, dictionaries, encyclopedias, search engines, and anything else you can reach with a URL.
 
 <img alt="Babeleo - At A Glance" src="https://github.com/user-attachments/assets/b1f08d1a-6a18-4ea0-9e6f-f8dbe5e2f968" />  
 Babeleos panel icon with context menu, the settings dialog and the desktop applet  
@@ -22,56 +21,31 @@ Manual query dialog, open it through the context menu or by a keyboard shortcut
 
 - **One-click lookup**: select text with the mouse, click the icon or press the keyboard shortcut → browser opens the result
 - **Manual query**: enter a search term directly in the applet's popup dialog
-- **Global keyboard shortcut**: configurable shortcut for hands-free use
+- **Global keyboard shortcuts**: configurable shortcuts for even faster use
 - **Fully configurable services**: add, edit, remove any engine — point it at any URL that accepts a query string
 - **Automatic favicon download**: each service displays its website icon
 - **Context menu**: quickly switch between services, organize them into main menu and submenu
-- **Desktop widget**: can also be added to the desktop — query clipboard content with your keyboard shortcut or make a manual query. Choose your search engine in the dropdown
+- **Desktop widget**: query clipboard content with your keyboard shortcut or make a manual query. Choose your search engine in the dropdown
 - **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to search with the clipboard content without changing your current engine ("click & forget")
 
 ## Built-in services (all configurable)
 
 The applet ships with a set of example services to get you started. You can add,
-remove or change all of them freely — none are mandatory:
+remove or change all of them freely — none are mandatory.
 
-- **Translation**: Google Translate, Linguee, leo.org (DE↔EN/FR/ES/IT/ZH)
-- **Search**: Google, DuckDuckGo, ArchWiki
-- **Encyclopedias**: Wikipedia (DE, EN), Wiktionary (EN)
-- **Dictionaries**: Duden (DE), Cambridge Dictionary (EN-DE), Collins (EN-DE), dict.cc, Merriam-Webster (EN), Real Academia Española (ES)
-- **Other**: Google Maps, PubMed (medical literature)
-
-No data is ever sent to any service without an explicit user action (clicking).
-Your browser handles all communication — Babeleo only opens a URL.
+No data is ever sent to any service without an explicit user action (clicking). Your browser handles all communication — Babeleo only opens a URL.
 The developper is not affiliated with any of these services.
 
 ---
 
 ## Keyboard shortcuts
 
-Babeleo exposes two independent keyboard shortcuts, both configurable without touching any config file.
+Babeleo exposes two independent global keyboard shortcuts, both configurable in Babeleo's settings dialog:
 
-### Translate clipboard content (one-click shortcut)
+- Query clipboard content with the selected engine
+- Open the manual query dialog
 
-Right-click the applet → *Configure Babeleo…* → **Keyboard Shortcuts** tab.
-The entry *Activate widget as if clicked* triggers the same action as a left-click: reads the
-primary selection (or clipboard) and opens the current service in your browser.
-
-### Open the manual query dialog
-
-Right-click the applet → *Configure Babeleo…* → **Shortcuts** tab.
-The entry *Open manual query dialog* opens the text-input popup so you can type a search term
-directly.
-
-Both shortcuts are stored by KDE's global shortcut system and also appear in
-*System Settings → Shortcuts → Plasma Workspace* (search for **babeleo**).
-
-> **Why are there two shortcut pages in the settings dialog?**
-> Plasma 6 automatically adds a built-in *Keyboard Shortcuts* page to the settings dialog of
-> every applet — this page manages the *Activate widget* shortcut and cannot be removed or
-> replaced by the applet itself. The custom *Shortcuts* page is the one added by Babeleo to
-> configure the manual query shortcut. This is a Plasma framework limitation; consolidating
-> both into a single page would require replacing the entire settings dialog with a custom
-> implementation, which is a disproportionate amount of complexity for little gain.
+Due to Plasma limitations, this shortcuts have to be configured on two distinct shortcut pages in the settings dialog.
 
 ---
 
@@ -89,6 +63,13 @@ Both shortcuts are stored by KDE's global shortcut system and also appear in
 
 ## Build & Install
 
+### Arch Linux AUR package
+
+Arch Linux users can simply install Babeleo from the AUR:
+https://aur.archlinux.org/packages/babeleo
+
+### Manual build and install
+
 ```bash
 # Clone
 git clone https://github.com/tryptophane/babeleo-plasma.git
@@ -105,7 +86,7 @@ sudo cmake --install .
 
 After installation, right-click the desktop or panel → *Add Widgets* → search for **Babeleo**.
 
-To reload without restarting your session:
+To reload Plasma without restarting your session:
 ```bash
 kquitapp6 plasmashell && kstart plasmashell
 ```
