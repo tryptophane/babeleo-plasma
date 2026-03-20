@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.2 (20.03.2026)
+
+- Added hint in README to the new AUR package for Arch Linux users
+- Renamed icon files to meet conventions 
+- Fixed compilation warnings when building AUR package
+- Removed AI generated clutter from README
+
 ## 0.7.1 (19.03.2026)
 
 - Fix some ctrl + click related bugs
