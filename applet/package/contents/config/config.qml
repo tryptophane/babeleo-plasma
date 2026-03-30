@@ -17,8 +17,8 @@ ConfigModel {
         source: "configSearchEngines.qml"
     }
     ConfigCategory {
-        name: i18nd("plasma_applet_babeleo", "Shortcuts")
-        icon: "preferences-desktop-keyboard"
+        name: i18nd("plasma_applet_babeleo", "Settings")
+        icon: "settings-configure"
         source: "configShortcuts.qml"
         // The manual query shortcut is a global shortcut — only meaningful when the
         // applet lives in a panel (formFactor != 0). Hide this page for desktop widgets.

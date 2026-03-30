@@ -101,6 +101,13 @@ public:
     Q_INVOKABLE bool isCtrlHeld() const;
 
     /**
+     * Asks Plasma to show the native applet context menu (same as right-click).
+     * Used in double-click mode when a confirmed single click is detected.
+     * Emits AppletQuickItem::contextMenuRequested which the containment handles.
+     */
+    Q_INVOKABLE void requestContextMenu(double globalX, double globalY);
+
+    /**
      * Opens the current search engine with the given text.
      * Called from the manual search dialog (popup).
      */

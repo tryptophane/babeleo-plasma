@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(babeleo VERSION 0.7.3)
+project(babeleo VERSION 0.8.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -35,6 +35,7 @@ find_package(KF6 REQUIRED COMPONENTS
 
 # Plasma 6 Framework
 find_package(Plasma REQUIRED)
+find_package(PlasmaQuick REQUIRED)
 
 # Optional runtime dependency: wl-clipboard (package: wl-clipboard)
 # Required for Wayland Primary Selection (mouse selection without Ctrl+C).

@@ -37,6 +37,7 @@ target_link_libraries(plasma_applet_babeleo
         KF6::WidgetsAddons    # KMessageBox
         KF6::WindowSystem     # KWaylandExtras, KWindowSystem (xdg-activation token)
         Plasma::Plasma        # Plasma::Applet base class
+        Plasma::PlasmaQuick   # PlasmaQuick::AppletQuickItem (for context menu)
 )
 
 # plasma_install_package installiert das QML-Paket (UI, Config, etc.)

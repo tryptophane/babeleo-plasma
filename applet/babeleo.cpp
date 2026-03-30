@@ -28,6 +28,9 @@
 
 #include <KConfig>
 #include <KConfigGroup>
+#include <QMouseEvent>
+#include <QQuickWindow>
+#include <PlasmaQuick/AppletQuickItem>
 #include <KGlobalAccel>
 #include <KLocalizedString>
 #include <KIO/FavIconRequestJob>
@@ -405,6 +408,28 @@ void Babeleo::browseWithClipboard()
 bool Babeleo::isCtrlHeld() const
 {
     return QGuiApplication::keyboardModifiers() & Qt::ControlModifier;
+}
+
+void Babeleo::requestContextMenu(double globalX, double globalY)
+{
+    // Synthesise a right-click at the given screen position so that Plasma's
+    // containment event handling opens the native context menu — exactly the
+    // same menu that appears on a real right-click.
+    auto *quickItem = PlasmaQuick::AppletQuickItem::itemForApplet(this);
+    if (!quickItem) return;
+
+    QQuickWindow *window = quickItem->window();
+    if (!window) return;
+
+    const QPointF globalPos(globalX, globalY);
+    const QPointF localPos = window->mapFromGlobal(globalPos.toPoint());
+
+    QCoreApplication::postEvent(window,
+        new QMouseEvent(QEvent::MouseButtonPress, localPos, globalPos,
+                        Qt::RightButton, Qt::RightButton, Qt::NoModifier));
+    QCoreApplication::postEvent(window,
+        new QMouseEvent(QEvent::MouseButtonRelease, localPos, globalPos,
+                        Qt::RightButton, Qt::NoButton, Qt::NoModifier));
 }
 
 void Babeleo::browseWithClipboardOnEngine(const QString &engineName)

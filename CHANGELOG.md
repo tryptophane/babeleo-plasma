@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0
+
+- Added option to trigger search on double click insted of single click. If this is selected, a single click on the icon will open the context menu (like the right click)
+
 ## 0.7.3 (20.03.2026)
 
 - Fixed version in metadata.json

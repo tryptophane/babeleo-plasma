@@ -47,6 +47,7 @@ PlasmoidItem {
     // which is called AFTER the activated() signal is emitted (not before).
     property bool blockExpand: false
     property int wheelDelta: 0
+    property point lastClickGlobalPos: Qt.point(0, 0)
 
     // ListModel (not a JS array) so that model.icon in the delegate is a proper
     // QVariant QString — Kirigami.Icon resolves file paths reliably from ListModel roles.
@@ -93,13 +94,31 @@ PlasmoidItem {
             hoverEnabled: true
             acceptedButtons: Qt.LeftButton
 
+            // In double-click mode: a single click is only confirmed once we know
+            // no second click is coming. We wait one system double-click interval
+            // before deciding it was a real single click (→ open context menu).
+            Timer {
+                id: singleClickTimer
+                interval: Qt.styleHints.mouseDoubleClickInterval
+                onTriggered: root.plasmoid.requestContextMenu(
+                    root.lastClickGlobalPos.x, root.lastClickGlobalPos.y)
+            }
+
             onClicked: function(mouse) {
-                // Left click: translate clipboard content directly.
-                // root.plasmoid is the actual C++ Babeleo object (QObject* from applet()).
-                // IMPORTANT: Plasmoid (attachment) only knows the Plasma::Applet API.
-                //            root.plasmoid (property of PlasmoidItem) returns our
-                //            Babeleo instance with all Q_INVOKABLE methods.
-                root.plasmoid.browseWithClipboard()
+                if (Plasmoid.configuration.doubleClickMode) {
+                    root.lastClickGlobalPos = compactItem.mapToGlobal(Qt.point(mouse.x, mouse.y))
+                    singleClickTimer.restart()
+                } else {
+                    root.plasmoid.browseWithClipboard()
+                }
+            }
+
+            onDoubleClicked: function(mouse) {
+                if (Plasmoid.configuration.doubleClickMode) {
+                    // Cancel the pending single-click action and search instead.
+                    singleClickTimer.stop()
+                    root.plasmoid.browseWithClipboard()
+                }
             }
 
             // Scroll up → previous engine, scroll down → next engine.

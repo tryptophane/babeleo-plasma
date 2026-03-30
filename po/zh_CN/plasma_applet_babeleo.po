@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: babeleo 0.7.3\n"
+"Project-Id-Version: babeleo 0.8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2024-01-01 00:00+0100\n"
 "Last-Translator: Pascal Pollet <paspol@gmx.de>\n"
@@ -120,8 +120,28 @@ msgid "Open Babeleo manual query"
 msgstr "打开 Babeleo 手动查询"
 
 #: applet/package/contents/config/config.qml
-msgid "Shortcuts"
-msgstr "快捷键"
+msgid "Settings"
+msgstr "设置"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "Click Behavior"
+msgstr "点击行为"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "Single click: search with clipboard content"
+msgstr "单击：使用剪贴板内容搜索"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "Double click: search with clipboard content"
+msgstr "双击：使用剪贴板内容搜索"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "A single left click will open the context menu (same as right click)."
+msgstr "单击左键将打开上下文菜单（与右键相同）。"
+
+#: applet/package/contents/ui/configShortcuts.qml
+msgid "Keyboard Shortcut"
+msgstr "键盘快捷键"
 
 #: applet/package/contents/ui/configShortcuts.qml
 msgid "Manual Query Shortcut"
