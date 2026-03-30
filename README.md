@@ -6,7 +6,7 @@ A KDE Plasma 6 applet to query any web service with the clipboard content or typ
 Select text with the mouse, click the icon — your browser opens the result directly.
 Works with translation services, dictionaries, encyclopedias, search engines, and anything else you can reach with a URL.
 
-<img alt="Babeleo - At A Glance" src="https://github.com/user-attachments/assets/b1f08d1a-6a18-4ea0-9e6f-f8dbe5e2f968" />  
+<img alt="Babeleo - At A Glance" src="https://github.com/user-attachments/assets/9a689101-feac-437f-ab61-8184de539459" />  
 Babeleos panel icon with context menu, the settings dialog and the desktop applet  
 
 ---  
