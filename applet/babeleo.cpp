@@ -285,15 +285,25 @@ void Babeleo::setEngineFromAction()
     // Use keyboardModifiers() (cached Qt event state) rather than queryKeyboardModifiers()
     // (live OS query), because on Wayland the popup surface may no longer have keyboard
     // focus by the time the slot runs, making the live query return 0.
-    if (QGuiApplication::keyboardModifiers() & Qt::ControlModifier) {
-        // Use the clipboard snapshot taken when the menu opened — the primary
-        // selection may have been lost during submenu navigation.
-        openUrl(engineName, m_menuClipboardCache);
-        // QActionGroup already moved the checkmark to the clicked action before this
-        // slot ran. Restore it to the actual current engine.
+    const Qt::KeyboardModifiers mods = QGuiApplication::keyboardModifiers();
+    if (mods & Qt::ControlModifier) {
+        // Restore checkmark first (QActionGroup already moved it to the clicked action).
         const auto actions = m_langChoices->actions();
         for (QAction *a : actions) {
             a->setChecked(a->data().toString() == m_currentEngine);
+        }
+        if (mods & Qt::ShiftModifier) {
+            // Ctrl+Shift+Click: open manual query popup pre-targeted at this engine.
+            // browseWithText() will use m_oneshotEngine instead of m_currentEngine,
+            // then clear it, so the selected engine is never permanently changed.
+            m_oneshotEngine = engineName;
+            Q_EMIT oneshotEngineChanged();
+            Q_EMIT requestTogglePopup();
+        } else {
+            // Ctrl+Click: "click & forget" — search clipboard without switching engine.
+            // Use the clipboard snapshot taken when the menu opened — the primary
+            // selection may have been lost during submenu navigation.
+            openUrl(engineName, m_menuClipboardCache);
         }
         return;
     }
@@ -441,7 +451,17 @@ void Babeleo::browseWithClipboardOnEngine(const QString &engineName)
 
 void Babeleo::browseWithText(const QString &text)
 {
-    openUrl(m_currentEngine, text);
+    const QString target = m_oneshotEngine.isEmpty() ? m_currentEngine : m_oneshotEngine;
+    clearOneshotEngine();
+    openUrl(target, text);
+}
+
+void Babeleo::clearOneshotEngine()
+{
+    if (!m_oneshotEngine.isEmpty()) {
+        m_oneshotEngine.clear();
+        Q_EMIT oneshotEngineChanged();
+    }
 }
 
 void Babeleo::fetchIcon(const QString &engineName, const QString &pageUrl)
@@ -609,7 +629,7 @@ void Babeleo::populateEngines()
                   << QStringLiteral("babelfishleo") << QStringLiteral("0") << QStringLiteral("0");
 
     m_enginesList << QStringLiteral("Wikipedia DE")
-                  << QStringLiteral("https://de.wikipedia.org/wiki/%s")
+                  << QStringLiteral("https://de.wikipedia.org/w/index.php?search=%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("0") << QStringLiteral("0");
 
     // --- Submenu (position 1) ---
@@ -662,11 +682,11 @@ void Babeleo::populateEngines()
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
     m_enginesList << QStringLiteral("Wikipedia EN")
-                  << QStringLiteral("https://en.wikipedia.org/wiki/%s")
+                  << QStringLiteral("https://en.wikipedia.org/w/index.php?search=%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
     m_enginesList << QStringLiteral("Wiktionary EN")
-                  << QStringLiteral("https://en.wiktionary.org/wiki/%s")
+                  << QStringLiteral("https://en.wiktionary.org/w/index.php?search=%s")
                   << QStringLiteral("babelfishleo") << QStringLiteral("1") << QStringLiteral("0");
 
     m_configuration.writeEntry("engines", m_enginesList);

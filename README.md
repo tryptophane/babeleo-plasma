@@ -27,6 +27,7 @@ Manual query dialog, open it through the context menu or by a keyboard shortcut
 - **Context menu**: quickly switch between services, organize them into main menu and submenu
 - **Desktop widget**: query clipboard content with your keyboard shortcut or make a manual query. Choose your search engine in the dropdown
 - **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to search with the clipboard content without changing your current engine ("click & forget")
+- **Quick manual query on any engine**: Ctrl+Shift+Click an engine in the context menu of the panel applet to open the manual query dialog for this engine, without changing your current engine.
 
 ## Built-in services (all configurable)
 

@@ -1,8 +1,14 @@
 # Changelog
 
+## 0.9.0 (04.04.2026)
+
+- **Quick manual query on any engine**: Ctrl+Shift+Click an engine in the context menu of the panel applet to open the manual query dialog for this engine, without changing your current engine ("one shot manual query"). Similar to the Ctrl+Click "click & forget" feature published in version 0.7.0
+- Added missing translations for name and description fields of the metadata.json files
+- Improved the preconfigured URLs for the Wikipedia and Wiktionary engines, which will now support a more fuzzy search
+
 ## 0.8.0 (30.03.2026)
 
-- Added option to trigger search on double click insted of single click. If this is selected, a single click on the icon will open the context menu (like the right click)
+- Added option to trigger search on double click instead of single click. If this is selected, a single click on the icon will open the context menu (like the right click)
 
 ## 0.7.3 (20.03.2026)
 

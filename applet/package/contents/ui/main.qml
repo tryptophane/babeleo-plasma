@@ -41,6 +41,8 @@ PlasmoidItem {
     toolTipSubText: i18nd("plasma_applet_babeleo", "Current engine: %1", root.plasmoid.currentEngine)
                     + "<br><font color='" + Kirigami.Theme.disabledTextColor + "'>"
                     + i18nd("plasma_applet_babeleo", "Ctrl+Click an engine to search without switching")
+                    + "<br>"
+                    + i18nd("plasma_applet_babeleo", "Ctrl+Shift+Click an engine to type a query for it")
                     + "</font>"
 
     // Set to true during onActivated handling to block Plasma's setExpanded(true),
@@ -52,6 +54,14 @@ PlasmoidItem {
     // ListModel (not a JS array) so that model.icon in the delegate is a proper
     // QVariant QString — Kirigami.Icon resolves file paths reliably from ListModel roles.
     ListModel { id: engineModel }
+
+    function iconForEngine(name) {
+        for (var i = 0; i < engineModel.count; i++) {
+            var e = engineModel.get(i)
+            if (e.name === name) return e.icon || ""
+        }
+        return ""
+    }
 
     function updateEngineModel() {
         var all = root.plasmoid.engineList()
@@ -159,10 +169,12 @@ PlasmoidItem {
             id: popupHeading
             RowLayout {
                 anchors.fill: parent
-                spacing: Kirigami.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing * 2
 
                 Kirigami.Icon {
-                    source: Plasmoid.icon
+                    source: root.plasmoid.oneshotEngine
+                            ? root.iconForEngine(root.plasmoid.oneshotEngine)
+                            : Plasmoid.icon
                     implicitWidth: Kirigami.Units.iconSizes.small
                     implicitHeight: Kirigami.Units.iconSizes.small
                 }
@@ -234,12 +246,20 @@ PlasmoidItem {
                         }
                     }
                 }
-                // Panel popup: static label (engine switching via context menu)
+                // Panel popup: engine name label (switching via context menu).
+                // In one-shot mode shows the target engine and a subtitle hint.
                 PlasmaComponents3.Label {
                     visible: Plasmoid.formFactor !== 0
-                    text: root.plasmoid.currentEngine
                     Layout.fillWidth: true
-                    font.bold: true
+                    textFormat: Text.RichText
+                    text: root.plasmoid.oneshotEngine
+                          ? "<b><font color='" + Kirigami.Theme.highlightColor + "'>"
+                            + root.plasmoid.oneshotEngine + "</font></b>"
+                            + "<br><small><font color='" + Kirigami.Theme.disabledTextColor + "'>"
+                            + i18nd("plasma_applet_babeleo", "One-shot — current engine unchanged")
+                            + "</font></small>"
+                          : root.plasmoid.currentEngine
+                    font.bold: !root.plasmoid.oneshotEngine
                 }
 
                 PlasmaComponents3.ToolButton {
@@ -307,6 +327,9 @@ PlasmoidItem {
                 if (root.expanded) {
                     queryField.text = ""
                     queryField.forceActiveFocus()
+                } else {
+                    // Popup closed without searching — discard any pending one-shot engine.
+                    root.plasmoid.clearOneshotEngine()
                 }
             }
         }

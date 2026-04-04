@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: babeleo 0.8.0\n"
+"Project-Id-Version: babeleo 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2024-01-01 00:00+0100\n"
 "Last-Translator: Pascal Pollet <paspol@gmx.de>\n"
@@ -158,3 +158,11 @@ msgstr "Ctrl+Clic sur un moteur pour rechercher sans changer"
 #: applet/package/contents/ui/main.qml
 msgid "Ctrl+Click to search without switching engine"
 msgstr "Ctrl+Clic pour rechercher sans changer de moteur"
+
+#: applet/package/contents/ui/main.qml
+msgid "One-shot — current engine unchanged"
+msgstr "Ponctuel — moteur actuel inchangé"
+
+#: applet/package/contents/ui/main.qml
+msgid "Ctrl+Shift+Click an engine to type a query for it"
+msgstr "Ctrl+Maj+Clic sur un moteur pour saisir une requête"

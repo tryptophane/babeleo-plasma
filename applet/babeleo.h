@@ -56,6 +56,13 @@ class Babeleo : public Plasma::Applet
     /** The current global shortcut for opening the manual query dialog. */
     Q_PROPERTY(QKeySequence manualQueryShortcut READ manualQueryShortcut NOTIFY manualQueryShortcutChanged)
 
+    /**
+     * When set, the next manual query (browseWithText) will use this engine
+     * instead of the current one, then clear itself ("one-shot" mode).
+     * Set by Ctrl+Shift+Click on a context menu engine. Empty string = normal mode.
+     */
+    Q_PROPERTY(QString oneshotEngine READ oneshotEngine NOTIFY oneshotEngineChanged)
+
 public:
     // Plasma 6 constructor signature: KPluginMetaData instead of QVariantList as second parameter
     Babeleo(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
@@ -76,6 +83,12 @@ public:
 
     // Getter for the Q_PROPERTY self - returns this instance as QObject* for QML dynamic dispatch
     QObject *self() { return this; }
+
+    // Getter for the Q_PROPERTY oneshotEngine
+    QString oneshotEngine() const { return m_oneshotEngine; }
+
+    /** Clears the one-shot engine. Called from QML when the popup is cancelled. */
+    Q_INVOKABLE void clearOneshotEngine();
 
     // Q_INVOKABLE: These methods can be called directly from QML
     // via "Plasmoid.methodName()" or "Plasmoid.self.methodName()"
@@ -154,6 +167,7 @@ public:
 
 Q_SIGNALS:
     void currentEngineChanged();
+    void oneshotEngineChanged();
 
     /**
      * Signal: QML should open/close the popup dialog.
@@ -181,6 +195,7 @@ private:
     void saveEnginesToConfig();
 
     QString m_currentEngine;
+    QString m_oneshotEngine;      // set on Ctrl+Shift+Click; used by next browseWithText()
     QString m_menuClipboardCache; // clipboard snapshot taken when context menu opens
     QActionGroup *m_langChoices = nullptr;
     QList<QAction *> m_actions;
