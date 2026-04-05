@@ -171,7 +171,47 @@ PlasmoidItem {
                 anchors.fill: parent
                 spacing: Kirigami.Units.smallSpacing * 2
 
+                // Desktop widget only: clicking the engine icon searches with clipboard content,
+                // honouring the single/double-click setting (double-click mode → only double-click
+                // triggers a search; single click is intentionally ignored).
+                Item {
+                    visible: Plasmoid.formFactor === 0
+                    implicitWidth: Kirigami.Units.iconSizes.small
+                    implicitHeight: Kirigami.Units.iconSizes.small
+
+                    Kirigami.Icon {
+                        anchors.fill: parent
+                        source: root.plasmoid.oneshotEngine
+                                ? root.iconForEngine(root.plasmoid.oneshotEngine)
+                                : Plasmoid.icon
+                        active: desktopIconMouseArea.containsMouse
+                    }
+
+                    MouseArea {
+                        id: desktopIconMouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        acceptedButtons: Qt.LeftButton
+
+                        PlasmaComponents3.ToolTip.text: Plasmoid.configuration.doubleClickMode
+                            ? i18nd("plasma_applet_babeleo", "Double-click to query clipboard content")
+                            : i18nd("plasma_applet_babeleo", "Click to query clipboard content")
+                        PlasmaComponents3.ToolTip.visible: containsMouse
+                        PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+
+                        onClicked: {
+                            if (!Plasmoid.configuration.doubleClickMode)
+                                root.plasmoid.browseWithClipboard()
+                        }
+                        onDoubleClicked: {
+                            if (Plasmoid.configuration.doubleClickMode)
+                                root.plasmoid.browseWithClipboard()
+                        }
+                    }
+                }
+                // Panel popup: same icon without click handling
                 Kirigami.Icon {
+                    visible: Plasmoid.formFactor !== 0
                     source: root.plasmoid.oneshotEngine
                             ? root.iconForEngine(root.plasmoid.oneshotEngine)
                             : Plasmoid.icon

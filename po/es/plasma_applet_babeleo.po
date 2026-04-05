@@ -166,3 +166,11 @@ msgstr "Puntual — motor actual sin cambios"
 #: applet/package/contents/ui/main.qml
 msgid "Ctrl+Shift+Click an engine to type a query for it"
 msgstr "Ctrl+Mayús+Clic en un motor para escribir una consulta"
+
+#: applet/package/contents/ui/main.qml
+msgid "Click to query clipboard content"
+msgstr "Clic para consultar el contenido del portapapeles"
+
+#: applet/package/contents/ui/main.qml
+msgid "Double-click to query clipboard content"
+msgstr "Doble clic para consultar el contenido del portapapeles"

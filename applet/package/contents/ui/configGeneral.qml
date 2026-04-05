@@ -23,8 +23,10 @@ Item {
     // Recompute unsavedChanges by comparing against the currently saved values,
     // so that reverting a change correctly disables the Apply button again.
     function checkUnsavedChanges() {
+        var shortcutChanged = (Plasmoid.formFactor !== 0)
+            && (shortcutItem.keySequence.toString() !== Plasmoid.self.manualQueryShortcut.toString())
         unsavedChanges = (pendingDoubleClickMode !== Plasmoid.configuration.doubleClickMode)
-                      || (shortcutItem.keySequence.toString() !== Plasmoid.self.manualQueryShortcut.toString())
+                      || shortcutChanged
     }
 
     ColumnLayout {
@@ -74,9 +76,9 @@ Item {
             onToggled: if (checked) { pendingDoubleClickMode = true; checkUnsavedChanges() }
         }
 
-        // Discreet hint, only visible when double-click mode is selected
+        // Discreet hint, only visible when double-click mode is selected and in panel
         PlasmaComponents3.Label {
-            visible: pendingDoubleClickMode
+            visible: pendingDoubleClickMode && Plasmoid.formFactor !== 0
             text: i18nd("plasma_applet_babeleo", "A single left click will open the context menu (same as right click).")
             color: Kirigami.Theme.disabledTextColor
             wrapMode: Text.WordWrap
@@ -84,11 +86,16 @@ Item {
             Layout.topMargin: Kirigami.Units.smallSpacing
         }
 
-        // ── Keyboard Shortcut ────────────────────────────────────────────────
+        // ── Keyboard Shortcut (panel only) ───────────────────────────────────
 
-        Item { Layout.preferredHeight: Kirigami.Units.largeSpacing * 2; Layout.fillWidth: true }
+        Item {
+            visible: Plasmoid.formFactor !== 0
+            Layout.preferredHeight: Kirigami.Units.largeSpacing * 2
+            Layout.fillWidth: true
+        }
 
         RowLayout {
+            visible: Plasmoid.formFactor !== 0
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
@@ -103,9 +110,14 @@ Item {
             }
         }
 
-        Item { Layout.preferredHeight: Kirigami.Units.smallSpacing; Layout.fillWidth: true }
+        Item {
+            visible: Plasmoid.formFactor !== 0
+            Layout.preferredHeight: Kirigami.Units.smallSpacing
+            Layout.fillWidth: true
+        }
 
         Kirigami.FormLayout {
+            visible: Plasmoid.formFactor !== 0
             Layout.fillWidth: true
 
             KeySequenceItem {

@@ -166,3 +166,11 @@ msgstr "Einmalig — aktuelle Suchmaschine unverändert"
 #: applet/package/contents/ui/main.qml
 msgid "Ctrl+Shift+Click an engine to type a query for it"
 msgstr "Strg+Umschalt+Klick auf eine Suchmaschine zum Eingeben einer Abfrage"
+
+#: applet/package/contents/ui/main.qml
+msgid "Click to query clipboard content"
+msgstr "Klicken, um den Inhalt der Zwischenablage abzufragen"
+
+#: applet/package/contents/ui/main.qml
+msgid "Double-click to query clipboard content"
+msgstr "Doppelklicken, um den Inhalt der Zwischenablage abzufragen"

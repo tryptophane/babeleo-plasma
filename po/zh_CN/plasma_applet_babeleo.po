@@ -166,3 +166,11 @@ msgstr "单次使用 — 当前引擎不变"
 #: applet/package/contents/ui/main.qml
 msgid "Ctrl+Shift+Click an engine to type a query for it"
 msgstr "按住 Ctrl+Shift 单击引擎以输入查询"
+
+#: applet/package/contents/ui/main.qml
+msgid "Click to query clipboard content"
+msgstr "单击以查询剪贴板内容"
+
+#: applet/package/contents/ui/main.qml
+msgid "Double-click to query clipboard content"
+msgstr "双击以查询剪贴板内容"

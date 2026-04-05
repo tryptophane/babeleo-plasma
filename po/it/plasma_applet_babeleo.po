@@ -166,3 +166,11 @@ msgstr "Una tantum — motore attuale invariato"
 #: applet/package/contents/ui/main.qml
 msgid "Ctrl+Shift+Click an engine to type a query for it"
 msgstr "Ctrl+Maiusc+Clic su un motore per digitare una query"
+
+#: applet/package/contents/ui/main.qml
+msgid "Click to query clipboard content"
+msgstr "Clic per interrogare il contenuto degli appunti"
+
+#: applet/package/contents/ui/main.qml
+msgid "Double-click to query clipboard content"
+msgstr "Doppio clic per interrogare il contenuto degli appunti"

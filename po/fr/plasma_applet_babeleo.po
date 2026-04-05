@@ -166,3 +166,11 @@ msgstr "Ponctuel — moteur actuel inchangé"
 #: applet/package/contents/ui/main.qml
 msgid "Ctrl+Shift+Click an engine to type a query for it"
 msgstr "Ctrl+Maj+Clic sur un moteur pour saisir une requête"
+
+#: applet/package/contents/ui/main.qml
+msgid "Click to query clipboard content"
+msgstr "Cliquer pour interroger le contenu du presse-papiers"
+
+#: applet/package/contents/ui/main.qml
+msgid "Double-click to query clipboard content"
+msgstr "Double-cliquer pour interroger le contenu du presse-papiers"
