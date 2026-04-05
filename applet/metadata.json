@@ -23,7 +23,7 @@
         "Name[fr]": "Babeleo (traducteur)",
         "Name[it]": "Babeleo (traduttore)",
         "Name[zh_CN]": "Babeleo 翻译器",
-        "Version": "0.9.0",
+        "Version": "0.10.0",
         "Website": "https://github.com/tryptophane/babeleo-plasma"
     },
     "X-KDE-TranslationDomain": "plasma_applet_babeleo",

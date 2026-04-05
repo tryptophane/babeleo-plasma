@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.0 (06.04.2026)
+
+- Desktop widget header icon is now clickable: single-click or double-click searches with clipboard content depending on the click behaviour setting
+- Tooltip on the icon reflects the active click mode
+- Settings config page is now shown for desktop widgets too, displaying only the click behaviour section; the keyboard shortcut section and its panel-specific hint remain panel-only
+- fixes the bug where the one-shot manual query popup immediately disappeared when all windows on the KDE desktop were minimized
+
 ## 0.9.0 (04.04.2026)
 
 - **Quick manual query on any engine**: Ctrl+Shift+Click an engine in the context menu of the panel applet to open the manual query dialog for this engine, without changing your current engine ("one shot manual query"). Similar to the Ctrl+Click "click & forget" feature published in version 0.7.0

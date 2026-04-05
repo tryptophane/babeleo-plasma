@@ -25,7 +25,7 @@ Manual query dialog, open it through the context menu or by a keyboard shortcut
 - **Fully configurable services**: add, edit, remove any engine — point it at any URL that accepts a query string
 - **Automatic favicon download**: each service displays its website icon
 - **Context menu**: quickly switch between services, organize them into main menu and submenu
-- **Desktop widget**: query clipboard content with your keyboard shortcut or make a manual query. Choose your search engine in the dropdown
+- **Desktop widget**: offers all the functionality of the panel applet with a clean layout
 - **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to search with the clipboard content without changing your current engine ("click & forget")
 - **Quick manual query on any engine**: Ctrl+Shift+Click an engine in the context menu of the panel applet to open the manual query dialog for this engine, without changing your current engine.
 
