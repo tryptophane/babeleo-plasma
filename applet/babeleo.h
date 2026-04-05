@@ -17,6 +17,8 @@
 #include <Plasma/Applet>             // Base class for all Plasma applets
 #include <KConfigGroup>              // KDE configuration system
 
+#include <functional>
+
 #include <QAction>
 #include <QActionGroup>
 #include <QHash>
@@ -193,6 +195,13 @@ private:
     QString readClipboard();   // shared by browseWithClipboard() and browseWithClipboardOnEngine()
     void populateEngines();
     void saveEnginesToConfig();
+
+    /**
+     * On Wayland: requests an xdg-activation token, then calls setCurrentXdgActivationToken()
+     * and invokes callback(). On X11/other: invokes callback() immediately.
+     * Used wherever a window needs to come to the foreground reliably.
+     */
+    void withActivationToken(std::function<void()> callback);
 
     QString m_currentEngine;
     QString m_oneshotEngine;      // set on Ctrl+Shift+Click; used by next browseWithText()

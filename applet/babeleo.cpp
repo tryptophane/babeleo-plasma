@@ -298,7 +298,9 @@ void Babeleo::setEngineFromAction()
             // then clear it, so the selected engine is never permanently changed.
             m_oneshotEngine = engineName;
             Q_EMIT oneshotEngineChanged();
-            Q_EMIT requestTogglePopup();
+            // Request a Wayland activation token before showing the popup, so it
+            // keeps focus even when all windows are minimized (no active surface).
+            withActivationToken([this]() { Q_EMIT requestTogglePopup(); });
         } else {
             // Ctrl+Click: "click & forget" — search clipboard without switching engine.
             // Use the clipboard snapshot taken when the menu opened — the primary
@@ -308,6 +310,31 @@ void Babeleo::setEngineFromAction()
         return;
     }
     setEngine(engineName);
+}
+
+void Babeleo::withActivationToken(std::function<void()> callback)
+{
+    // On Wayland, windows need an xdg-activation token to come to the foreground.
+    // Without one, the compositor silently blocks focus (browser stays behind, or
+    // the panel popup loses focus immediately and closes).
+    // We request a token from KWin using any existing plasmashell window as the
+    // "requesting surface", then invoke the callback once the token is set.
+    if (KWindowSystem::isPlatformWayland()) {
+        const auto windows = QGuiApplication::topLevelWindows();
+        QWindow *win = windows.isEmpty() ? nullptr : windows.first();
+        auto *watcher = new QFutureWatcher<QString>(this);
+        connect(watcher, &QFutureWatcher<QString>::finished, this, [watcher, cb = std::move(callback)]() {
+            const QString token = watcher->result();
+            if (!token.isEmpty()) {
+                KWindowSystem::setCurrentXdgActivationToken(token);
+            }
+            watcher->deleteLater();
+            cb();
+        });
+        watcher->setFuture(KWaylandExtras::xdgActivationToken(win, QStringLiteral("org.kde.plasma.babeleo")));
+    } else {
+        callback();
+    }
 }
 
 void Babeleo::openUrl(const QString &engineName, const QString &query)
@@ -323,28 +350,7 @@ void Babeleo::openUrl(const QString &engineName, const QString &query)
     auto *job = new KIO::OpenUrlJob(QUrl(urlTemplate));
     job->setRunExecutables(false); // Security: only open URLs, do not launch programs
 
-    // On Wayland, global shortcuts have no implicit xdg-activation token
-    // (unlike mouse clicks which happen on a surface). Without a token,
-    // the compositor blocks the browser from coming to the foreground.
-    // Solution: explicitly request a token from KWin before starting the job.
-    if (KWindowSystem::isPlatformWayland()) {
-        // Use any top-level window of plasmashell as the requesting surface.
-        const auto windows = QGuiApplication::topLevelWindows();
-        QWindow *win = windows.isEmpty() ? nullptr : windows.first();
-
-        auto *watcher = new QFutureWatcher<QString>(job);
-        connect(watcher, &QFutureWatcher<QString>::finished, job, [watcher, job]() {
-            const QString token = watcher->result();
-            if (!token.isEmpty()) {
-                KWindowSystem::setCurrentXdgActivationToken(token);
-            }
-            watcher->deleteLater();
-            job->start();
-        });
-        watcher->setFuture(KWaylandExtras::xdgActivationToken(win, QStringLiteral("org.kde.plasma.babeleo")));
-    } else {
-        job->start();
-    }
+    withActivationToken([job]() { job->start(); });
 }
 
 QString Babeleo::readClipboard()

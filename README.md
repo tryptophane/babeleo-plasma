@@ -139,6 +139,9 @@ sudo rm -f /usr/lib/qt6/plugins/plasma/applets/org.kde.plasma.babeleo.so
 # QML package
 sudo rm -rf /usr/share/plasma/plasmoids/org.kde.plasma.babeleo/
 
+# Icons
+sudo rm -f /usr/share/icons/hicolor/128x128/apps/babelfishleo*.png
+
 # Translations
 sudo rm -f /usr/share/locale/*/LC_MESSAGES/plasma_applet_babeleo.mo
 ```
