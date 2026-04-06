@@ -102,7 +102,7 @@ Item {
         engineModel.setProperty(currentIndex, "name",     newName)
         engineModel.setProperty(currentIndex, "url",      urlField.text)
         engineModel.setProperty(currentIndex, "icon",     iconField.text)
-        engineModel.setProperty(currentIndex, "position", mainMenuRadio.checked ? "0" : "1")
+        engineModel.setProperty(currentIndex, "position", mainMenuRadio.checked ? "main" : "submenu")
         engineModel.setProperty(currentIndex, "hidden",   hideBox.checked)
     }
 
@@ -116,8 +116,9 @@ Item {
         urlField.text         = eng.url
         iconField.text        = eng.icon
         hideBox.checked       = eng.hidden
-        mainMenuRadio.checked = (eng.position === "0")
-        otherRadio.checked    = (eng.position !== "0")
+        // Accept both "main" (new) and "0" (legacy config from older installs).
+        mainMenuRadio.checked = (eng.position === "main" || eng.position === "0")
+        otherRadio.checked    = (eng.position !== "main" && eng.position !== "0")
         loading = false
         currentIndex = index
     }
@@ -311,7 +312,7 @@ Item {
                         const newName = i18nd("plasma_applet_babeleo","New Engine")
                         engineModel.append({
                             name: newName, url: "https://",
-                            icon: "babelfishleo", position: "1", hidden: false
+                            icon: "babelfishleo", position: "submenu", hidden: false
                         })
                         const newIdx = engineModel.count - 1
                         engineList.currentIndex = newIdx
