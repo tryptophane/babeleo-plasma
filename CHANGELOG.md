@@ -6,6 +6,7 @@
 - Tooltip on the icon reflects the active click mode
 - Settings config page is now shown for desktop widgets too, displaying only the click behaviour section; the keyboard shortcut section and its panel-specific hint remain panel-only
 - fixes the bug where the one-shot manual query popup immediately disappeared when all windows on the KDE desktop were minimized
+- Default search engines are now defined in applet/package/contents/data/engines.json instead of being hardcoded in babeleo.cpp
 
 ## 0.9.0 (04.04.2026)
 
