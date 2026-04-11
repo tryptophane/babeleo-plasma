@@ -11,11 +11,23 @@ import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
 
 Item {
+    // cfg_* properties: Plasma reads these from config on init and writes them back
+    // on Apply/OK via saveConfig(). Declaring all entries from main.xml suppresses
+    // "Setting initial properties failed" warnings.
+    property bool   cfg_doubleClickMode
+    property bool   cfg_doubleClickModeDefault
+    property var    cfg_engines
+    property var    cfg_enginesDefault
+    property string cfg_currentEngine
+    property string cfg_currentEngineDefault
+
+    // Page title shown in the Plasma settings dialog sidebar.
+    property string title: i18nd("plasma_applet_babeleo", "Settings")
+
     property bool unsavedChanges: false
-    property bool pendingDoubleClickMode: Plasmoid.configuration.doubleClickMode
 
     function saveConfig() {
-        Plasmoid.configuration.doubleClickMode = pendingDoubleClickMode
+        Plasmoid.configuration.doubleClickMode = cfg_doubleClickMode
         Plasmoid.self.setManualQueryShortcut(shortcutItem.keySequence)
         unsavedChanges = false
     }
@@ -25,7 +37,7 @@ Item {
     function checkUnsavedChanges() {
         var shortcutChanged = (Plasmoid.formFactor !== 0)
             && (shortcutItem.keySequence.toString() !== Plasmoid.self.manualQueryShortcut.toString())
-        unsavedChanges = (pendingDoubleClickMode !== Plasmoid.configuration.doubleClickMode)
+        unsavedChanges = (cfg_doubleClickMode !== Plasmoid.configuration.doubleClickMode)
                       || shortcutChanged
     }
 
@@ -65,20 +77,20 @@ Item {
         PlasmaComponents3.RadioButton {
             QQC2.ButtonGroup.group: clickModeGroup
             text: i18nd("plasma_applet_babeleo", "Single click: search with clipboard content")
-            checked: !pendingDoubleClickMode
-            onToggled: if (checked) { pendingDoubleClickMode = false; checkUnsavedChanges() }
+            checked: !cfg_doubleClickMode
+            onToggled: if (checked) { cfg_doubleClickMode = false; checkUnsavedChanges() }
         }
 
         PlasmaComponents3.RadioButton {
             QQC2.ButtonGroup.group: clickModeGroup
             text: i18nd("plasma_applet_babeleo", "Double click: search with clipboard content")
-            checked: pendingDoubleClickMode
-            onToggled: if (checked) { pendingDoubleClickMode = true; checkUnsavedChanges() }
+            checked: cfg_doubleClickMode
+            onToggled: if (checked) { cfg_doubleClickMode = true; checkUnsavedChanges() }
         }
 
         // Discreet hint, only visible when double-click mode is selected and in panel
         PlasmaComponents3.Label {
-            visible: pendingDoubleClickMode && Plasmoid.formFactor !== 0
+            visible: cfg_doubleClickMode && Plasmoid.formFactor !== 0
             text: i18nd("plasma_applet_babeleo", "A single left click will open the context menu (same as right click).")
             color: Kirigami.Theme.disabledTextColor
             wrapMode: Text.WordWrap

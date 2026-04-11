@@ -41,6 +41,20 @@ import org.kde.kirigami as Kirigami
 Item {
     id: root
 
+    // cfg_* properties: Plasma reads these from config on init and writes them back
+    // on Apply/OK via saveConfig(). Declaring all entries from main.xml suppresses
+    // "Setting initial properties failed" warnings. This page manages engines and
+    // currentEngine via saveConfig(); cfg_doubleClickMode is unused here.
+    property var    cfg_engines
+    property var    cfg_enginesDefault
+    property string cfg_currentEngine
+    property string cfg_currentEngineDefault
+    property bool   cfg_doubleClickMode
+    property bool   cfg_doubleClickModeDefault
+
+    // Page title shown in the Plasma settings dialog sidebar.
+    property string title: i18nd("plasma_applet_babeleo", "Search Engines")
+
     // Standard Plasma config page interface.
     // unsavedChanges is read by AppletConfiguration.qml to enable/disable Apply.
     // We never emit configurationChanged signal — see header comment.
@@ -344,10 +358,9 @@ Item {
         }
 
         // Visual divider
-        Rectangle {
+        Kirigami.Separator {
             Layout.fillHeight: true
-            width: 1
-            color: Kirigami.Theme.separatorColor
+            Layout.preferredWidth: 1
         }
 
         // Right panel: edit form
