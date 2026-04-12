@@ -67,7 +67,7 @@ PlasmoidItem {
         var all = root.plasmoid.engineList()
         engineModel.clear()
         for (var i = 0; i < all.length; i++) {
-            if (!all[i].hidden) engineModel.append({name: all[i].name, icon: all[i].icon})
+            if (!all[i].hidden) engineModel.append({name: all[i].name, icon: all[i].icon, position: all[i].position})
         }
     }
 
@@ -260,6 +260,9 @@ PlasmoidItem {
                             PlasmaComponents3.Label {
                                 text: model.name || ""
                                 Layout.fillWidth: true
+                                color: model.position === 'main'
+                                    ? Kirigami.Theme.positiveTextColor
+                                    : Kirigami.Theme.textColor
                             }
                         }
                     }

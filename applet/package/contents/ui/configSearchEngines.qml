@@ -296,7 +296,9 @@ Item {
                                 text: model.name
                                 color: model.hidden
                                     ? Kirigami.Theme.disabledTextColor
-                                    : Kirigami.Theme.textColor
+                                    : model.position === 'main'
+                                        ? Kirigami.Theme.positiveTextColor
+                                        : Kirigami.Theme.textColor
                                 elide: Text.ElideRight
                                 Layout.fillWidth: true
                             }
