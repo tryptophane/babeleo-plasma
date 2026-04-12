@@ -64,10 +64,16 @@ PlasmoidItem {
     }
 
     function updateEngineModel() {
-        var all = root.plasmoid.engineList()
+        var all = root.plasmoid.engineList().filter(e => !e.hidden)
+        all.sort(function(a, b) {
+            var aMain = (a.position === "main" || a.position === "0")
+            var bMain = (b.position === "main" || b.position === "0")
+            if (aMain !== bMain) return aMain ? -1 : 1
+            return a.name.localeCompare(b.name)
+        })
         engineModel.clear()
         for (var i = 0; i < all.length; i++) {
-            if (!all[i].hidden) engineModel.append({name: all[i].name, icon: all[i].icon, position: all[i].position})
+            engineModel.append({name: all[i].name, icon: all[i].icon, position: all[i].position})
         }
     }
 
@@ -261,7 +267,7 @@ PlasmoidItem {
                                 text: model.name || ""
                                 Layout.fillWidth: true
                                 color: model.position === 'main'
-                                    ? Kirigami.Theme.positiveTextColor
+                                    ? Kirigami.Theme.highlightColor
                                     : Kirigami.Theme.textColor
                             }
                         }

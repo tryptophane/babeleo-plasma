@@ -91,6 +91,12 @@ Item {
     function loadAllEngines() {
         engineModel.clear()
         const list = Plasmoid.self.engineList()
+        list.sort((a, b) => {
+            const aMain = (a.position === "main" || a.position === "0")
+            const bMain = (b.position === "main" || b.position === "0")
+            if (aMain !== bMain) return aMain ? -1 : 1
+            return a.name.localeCompare(b.name)
+        })
         originalEngineNames = list.map(e => e.name)
         originalSnapshot = list.map(e => ({
             name: e.name, url: e.url, icon: e.icon,
@@ -297,7 +303,7 @@ Item {
                                 color: model.hidden
                                     ? Kirigami.Theme.disabledTextColor
                                     : model.position === 'main'
-                                        ? Kirigami.Theme.positiveTextColor
+                                        ? Kirigami.Theme.highlightColor
                                         : Kirigami.Theme.textColor
                                 elide: Text.ElideRight
                                 Layout.fillWidth: true
