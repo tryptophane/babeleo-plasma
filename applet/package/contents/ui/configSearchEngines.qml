@@ -34,6 +34,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QC
+import QtQuick.Dialogs
+import QtCore
 import org.kde.plasma.plasmoid
 import org.kde.plasma.components as PC3
 import org.kde.kirigami as Kirigami
@@ -216,6 +218,28 @@ Item {
                                     position: eng.position, hidden: eng.hidden })
         }
         unsavedChanges = false
+
+        // Reload engines list and keep the currently edited engine selected if it still exists
+        const lastSelectedName = engineModel.get(currentIndex)?.name
+        this.loadAllEngines()
+        for (let i = 0; i < engineModel.count; i++) {
+            if (engineModel.get(i).name === lastSelectedName) {
+                engineList.currentIndex = i   
+                loadFormFromModel(i)
+                break
+            }
+        }
+        // If the currently selected engine was deleted, switch to the first one if any remain
+        let selectedEngineStillPresent = false
+        for (let i = 0; i < engineModel.count; i++) {
+            if (engineModel.get(i).name === Plasmoid.self.currentEngine) {
+                selectedEngineStillPresent = true
+                break
+            }
+        }
+        if (!selectedEngineStillPresent && engineModel.count > 0) {
+            Plasmoid.self.setEngine(engineModel.get(0).name)
+        }
     }
 
     Component.onCompleted: {
@@ -254,10 +278,102 @@ Item {
     }
 
     // -------------------------------------------------------------------------
+    // Export / Import
+    // -------------------------------------------------------------------------
+
+    // Build a JSON array from the local model (no icon, matches engines.json format).
+    function doExport(fileUrl) {
+        const engines = []
+        for (let i = 0; i < engineModel.count; i++) {
+            const e = engineModel.get(i)
+            engines.push({ 
+                name: e.name, 
+                url: e.url, 
+                icon: e.icon.startsWith('babelfishleo') ? e.icon : 'babelfishleo',
+                position: e.position,
+                hidden: e.hidden }
+            )
+        }
+        const err = Plasmoid.self.writeFile(fileUrl.toString(),
+                                            JSON.stringify(engines, null, 4))
+        if (err) {
+            exportImportMessage.type = Kirigami.MessageType.Error
+            exportImportMessage.text = i18nd("plasma_applet_babeleo", "Export failed: %1").arg(err)
+            exportImportMessage.visible = true
+        }
+    }
+
+    // Replace the local model with engines parsed from a JSON file.
+    function doImport(fileUrl) {
+        const content = Plasmoid.self.readFile(fileUrl.toString())
+        if (!content) {
+            exportImportMessage.type = Kirigami.MessageType.Error
+            exportImportMessage.text = i18nd("plasma_applet_babeleo", "Could not read the file.")
+            exportImportMessage.visible = true
+            return
+        }
+        let parsed
+        try { parsed = JSON.parse(content) } catch (e) {
+            exportImportMessage.type = Kirigami.MessageType.Error
+            exportImportMessage.text = i18nd("plasma_applet_babeleo", "Invalid JSON: %1").arg(e.message)
+            exportImportMessage.visible = true
+            return
+        }
+        if (!Array.isArray(parsed) || parsed.length === 0) {
+            exportImportMessage.type = Kirigami.MessageType.Error
+            exportImportMessage.text = i18nd("plasma_applet_babeleo", "No engines found in the file.")
+            exportImportMessage.visible = true
+            return
+        }
+        engineModel.clear()
+        for (const eng of parsed) {
+            engineModel.append({
+                name:     String(eng.name     || ""),
+                url:      String(eng.url      || ""),
+                icon:     String(eng.icon     || "babelfishleo"),
+                position: String(eng.position || "submenu"),
+                hidden:   Boolean(eng.hidden)
+            })
+        }
+        if (engineModel.count > 0) {
+            engineList.currentIndex = 0
+            loadFormFromModel(0)
+        } else {
+            currentIndex = -1
+        }
+        unsavedChanges = !modelMatchesOriginal()
+    }
+
+    FileDialog {
+        id: exportFileDialog
+        fileMode: FileDialog.SaveFile
+        title: i18nd("plasma_applet_babeleo", "Export Search Engines")
+        nameFilters: [i18nd("plasma_applet_babeleo", "JSON files (*.json)"),
+                      i18nd("plasma_applet_babeleo", "All files (*)")]
+        defaultSuffix: "json"
+        currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+        onAccepted: doExport(selectedFile)
+    }
+
+    FileDialog {
+        id: importFileDialog
+        fileMode: FileDialog.OpenFile
+        title: i18nd("plasma_applet_babeleo", "Import Search Engines")
+        nameFilters: [i18nd("plasma_applet_babeleo", "JSON files (*.json)"),
+                      i18nd("plasma_applet_babeleo", "All files (*)")]
+        onAccepted: doImport(selectedFile)
+    }
+
+    // -------------------------------------------------------------------------
     // Layout
     // -------------------------------------------------------------------------
-    RowLayout {
+    ColumnLayout {
         anchors.fill: parent
+        spacing: 0
+
+    RowLayout {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
         spacing: Kirigami.Units.largeSpacing
 
         // Left panel: engine list + Add/Delete buttons
@@ -302,7 +418,7 @@ Item {
                                 text: model.name
                                 color: model.hidden
                                     ? Kirigami.Theme.disabledTextColor
-                                    : model.position === 'main'
+                                    : model.position === 'main' && !highlighted
                                         ? Kirigami.Theme.highlightColor
                                         : Kirigami.Theme.textColor
                                 elide: Text.ElideRight
@@ -454,5 +570,43 @@ Item {
 
             Item { Layout.fillHeight: true }  // push form to top
         }
+    } // RowLayout
+
+    Kirigami.Separator { Layout.fillWidth: true }
+
+    // Footer: Export / Import buttons, full width below both panels
+    ColumnLayout {
+        Layout.fillWidth: true
+        spacing: 0
+
+        Kirigami.InlineMessage {
+            id: exportImportMessage
+            Layout.fillWidth: true
+            showCloseButton: true
+            visible: false
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.smallSpacing
+            Layout.bottomMargin: Kirigami.Units.smallSpacing
+            Layout.rightMargin: Kirigami.Units.largeSpacing
+            spacing: Kirigami.Units.smallSpacing
+
+            Item { Layout.fillWidth: true }
+
+            PC3.Button {
+                text: i18nd("plasma_applet_babeleo", "Export…")
+                icon.name: "document-export"
+                onClicked: exportFileDialog.open()
+            }
+            PC3.Button {
+                text: i18nd("plasma_applet_babeleo", "Import…")
+                icon.name: "document-import"
+                onClicked: importFileDialog.open()
+            }
+        }
     }
+
+    } // ColumnLayout (outer)
 }

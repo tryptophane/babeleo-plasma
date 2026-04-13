@@ -167,6 +167,14 @@ public:
     /** Updates the global shortcut for the manual query action. Called from QML config page. */
     Q_INVOKABLE void setManualQueryShortcut(const QKeySequence &shortcut);
 
+    /** Reads a local file and returns its contents. Accepts file:// URLs or plain paths.
+     *  Returns an empty string on error. Used by the engine import function in QML. */
+    Q_INVOKABLE QString readFile(const QString &urlOrPath) const;
+
+    /** Writes content to a local file. Accepts file:// URLs or plain paths.
+     *  Returns an empty string on success, or an error message on failure. */
+    Q_INVOKABLE QString writeFile(const QString &urlOrPath, const QString &content) const;
+
 Q_SIGNALS:
     void currentEngineChanged();
     void oneshotEngineChanged();

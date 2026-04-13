@@ -174,3 +174,43 @@ msgstr "Clic para consultar el contenido del portapapeles"
 #: applet/package/contents/ui/main.qml
 msgid "Double-click to query clipboard content"
 msgstr "Doble clic para consultar el contenido del portapapeles"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export Search Engines"
+msgstr "Exportar motores de búsqueda"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import Search Engines"
+msgstr "Importar motores de búsqueda"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "JSON files (*.json)"
+msgstr "Archivos JSON (*.json)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "All files (*)"
+msgstr "Todos los archivos (*)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export…"
+msgstr "Exportar…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import…"
+msgstr "Importar…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export failed: %1"
+msgstr "Error al exportar: %1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Could not read the file."
+msgstr "No se pudo leer el archivo."
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Invalid JSON: %1"
+msgstr "JSON no válido: %1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "No engines found in the file."
+msgstr "No se encontraron motores en el archivo."

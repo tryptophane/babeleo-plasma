@@ -174,3 +174,43 @@ msgstr "Clic per interrogare il contenuto degli appunti"
 #: applet/package/contents/ui/main.qml
 msgid "Double-click to query clipboard content"
 msgstr "Doppio clic per interrogare il contenuto degli appunti"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export Search Engines"
+msgstr "Esporta motori di ricerca"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import Search Engines"
+msgstr "Importa motori di ricerca"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "JSON files (*.json)"
+msgstr "File JSON (*.json)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "All files (*)"
+msgstr "Tutti i file (*)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export…"
+msgstr "Esporta…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import…"
+msgstr "Importa…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export failed: %1"
+msgstr "Esportazione non riuscita: %1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Could not read the file."
+msgstr "Impossibile leggere il file."
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Invalid JSON: %1"
+msgstr "JSON non valido: %1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "No engines found in the file."
+msgstr "Nessun motore trovato nel file."

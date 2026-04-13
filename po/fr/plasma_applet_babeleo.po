@@ -174,3 +174,43 @@ msgstr "Cliquer pour interroger le contenu du presse-papiers"
 #: applet/package/contents/ui/main.qml
 msgid "Double-click to query clipboard content"
 msgstr "Double-cliquer pour interroger le contenu du presse-papiers"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export Search Engines"
+msgstr "Exporter les moteurs de recherche"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import Search Engines"
+msgstr "Importer les moteurs de recherche"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "JSON files (*.json)"
+msgstr "Fichiers JSON (*.json)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "All files (*)"
+msgstr "Tous les fichiers (*)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export…"
+msgstr "Exporter…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import…"
+msgstr "Importer…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export failed: %1"
+msgstr "Échec de l'export : %1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Could not read the file."
+msgstr "Impossible de lire le fichier."
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Invalid JSON: %1"
+msgstr "JSON invalide : %1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "No engines found in the file."
+msgstr "Aucun moteur trouvé dans le fichier."

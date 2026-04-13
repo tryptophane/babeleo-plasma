@@ -174,3 +174,43 @@ msgstr "Klicken, um den Inhalt der Zwischenablage abzufragen"
 #: applet/package/contents/ui/main.qml
 msgid "Double-click to query clipboard content"
 msgstr "Doppelklicken, um den Inhalt der Zwischenablage abzufragen"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export Search Engines"
+msgstr "Suchmaschinen exportieren"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import Search Engines"
+msgstr "Suchmaschinen importieren"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "JSON files (*.json)"
+msgstr "JSON-Dateien (*.json)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "All files (*)"
+msgstr "Alle Dateien (*)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export…"
+msgstr "Exportieren …"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import…"
+msgstr "Importieren …"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export failed: %1"
+msgstr "Export fehlgeschlagen: %1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Could not read the file."
+msgstr "Die Datei konnte nicht gelesen werden."
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Invalid JSON: %1"
+msgstr "Ungültiges JSON: %1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "No engines found in the file."
+msgstr "Keine Suchmaschinen in der Datei gefunden."

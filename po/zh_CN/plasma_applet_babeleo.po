@@ -174,3 +174,43 @@ msgstr "单击以查询剪贴板内容"
 #: applet/package/contents/ui/main.qml
 msgid "Double-click to query clipboard content"
 msgstr "双击以查询剪贴板内容"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export Search Engines"
+msgstr "导出搜索引擎"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import Search Engines"
+msgstr "导入搜索引擎"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "JSON files (*.json)"
+msgstr "JSON 文件 (*.json)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "All files (*)"
+msgstr "所有文件 (*)"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export…"
+msgstr "导出…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import…"
+msgstr "导入…"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export failed: %1"
+msgstr "导出失败：%1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Could not read the file."
+msgstr "无法读取文件。"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Invalid JSON: %1"
+msgstr "无效的 JSON：%1"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "No engines found in the file."
+msgstr "文件中未找到搜索引擎。"

@@ -670,6 +670,29 @@ void Babeleo::setManualQueryShortcut(const QKeySequence &shortcut)
     Q_EMIT manualQueryShortcutChanged();
 }
 
+QString Babeleo::readFile(const QString &urlOrPath) const
+{
+    const QString path = urlOrPath.startsWith(QLatin1String("file://"))
+                         ? QUrl(urlOrPath).toLocalFile()
+                         : urlOrPath;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return QString();
+    return QString::fromUtf8(file.readAll());
+}
+
+QString Babeleo::writeFile(const QString &urlOrPath, const QString &content) const
+{
+    const QString path = urlOrPath.startsWith(QLatin1String("file://"))
+                         ? QUrl(urlOrPath).toLocalFile()
+                         : urlOrPath;
+    QFile file(path);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
+        return file.errorString();
+    file.write(content.toUtf8());
+    return QString();
+}
+
 K_PLUGIN_CLASS_WITH_JSON(Babeleo, "metadata.json")
 
 #include "babeleo.moc"
