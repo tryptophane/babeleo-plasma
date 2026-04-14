@@ -590,8 +590,18 @@ Item {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.smallSpacing
             Layout.bottomMargin: Kirigami.Units.smallSpacing
+            Layout.leftMargin: Kirigami.Units.largeSpacing
             Layout.rightMargin: Kirigami.Units.largeSpacing
             spacing: Kirigami.Units.smallSpacing
+
+            PC3.Button {
+                text: i18nd("plasma_applet_babeleo", "Fetch All Icons")
+                icon.name: "download"
+                onClicked: Plasmoid.self.fetchAllIcons()
+                PC3.ToolTip.text: i18nd("plasma_applet_babeleo", "Fetch missing favicons from their respective websites, if available.")
+                PC3.ToolTip.visible: hovered
+                PC3.ToolTip.delay: Kirigami.Units.toolTipDelay
+            }
 
             Item { Layout.fillWidth: true }
 
@@ -599,11 +609,17 @@ Item {
                 text: i18nd("plasma_applet_babeleo", "Export…")
                 icon.name: "document-export"
                 onClicked: exportFileDialog.open()
+                PC3.ToolTip.text: i18nd("plasma_applet_babeleo", "Export the search engine list to a JSON file. Note: custom icons fetched from websites will not be included.")
+                PC3.ToolTip.visible: hovered
+                PC3.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
             PC3.Button {
                 text: i18nd("plasma_applet_babeleo", "Import…")
                 icon.name: "document-import"
                 onClicked: importFileDialog.open()
+                PC3.ToolTip.text: i18nd("plasma_applet_babeleo", "Import search engines from a JSON file. This will completely replace your current list.")
+                PC3.ToolTip.visible: hovered
+                PC3.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
         }
     }

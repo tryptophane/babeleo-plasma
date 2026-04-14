@@ -214,3 +214,19 @@ msgstr "无效的 JSON：%1"
 #: applet/package/contents/ui/configSearchEngines.qml
 msgid "No engines found in the file."
 msgstr "文件中未找到搜索引擎。"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Fetch All Icons"
+msgstr "获取所有图标"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Fetch missing favicons from their respective websites, if available."
+msgstr "从各自的网站获取缺失的网站图标（如有）。"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export the search engine list to a JSON file. Note: custom icons fetched from websites will not be included."
+msgstr "将搜索引擎列表导出到 JSON 文件。注意：从网站获取的自定义图标不会包含在内。"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import search engines from a JSON file. This will completely replace your current list."
+msgstr "从 JSON 文件导入搜索引擎。这将完全替换您当前的列表。"

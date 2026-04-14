@@ -214,3 +214,19 @@ msgstr "JSON invalide : %1"
 #: applet/package/contents/ui/configSearchEngines.qml
 msgid "No engines found in the file."
 msgstr "Aucun moteur trouvé dans le fichier."
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Fetch All Icons"
+msgstr "Récupérer toutes les icônes"
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Fetch missing favicons from their respective websites, if available."
+msgstr "Récupérer les favicons manquants depuis leurs sites respectifs, si disponibles."
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Export the search engine list to a JSON file. Note: custom icons fetched from websites will not be included."
+msgstr "Exporter la liste des moteurs de recherche dans un fichier JSON. Remarque : les icônes personnalisées récupérées depuis des sites web ne seront pas incluses."
+
+#: applet/package/contents/ui/configSearchEngines.qml
+msgid "Import search engines from a JSON file. This will completely replace your current list."
+msgstr "Importer des moteurs de recherche depuis un fichier JSON. Cela remplacera complètement votre liste actuelle."
