@@ -64,26 +64,10 @@ Babeleo::Babeleo(QObject *parent, const KPluginMetaData &data, const QVariantLis
 
 Babeleo::~Babeleo()
 {
-    if (m_manualQueryAction) {
+    // removeAllShortcuts is already called from the destroyedChanged signal handler
+    // when the user removes the applet. Only do it here as a safety net for that case.
+    if (m_manualQueryAction && destroyed()) {
         KGlobalAccel::self()->removeAllShortcuts(m_manualQueryAction);
-    }
-
-    // Remove the "activate widget N" global shortcut entry that Plasma registers
-    // for each applet instance but does not clean up when the applet is removed.
-    const QString activateKey = QStringLiteral("activate widget %1").arg(id());
-    KConfig kgrc(QStringLiteral("kglobalshortcutsrc"), KConfig::NoGlobals);
-    KConfigGroup group = kgrc.group(QStringLiteral("plasmashell"));
-    if (group.hasKey(activateKey)) {
-        group.deleteEntry(activateKey);
-        kgrc.sync();
-        // Tell kglobalaccel to drop the in-memory entry as well.
-        QDBusConnection::sessionBus().call(
-            QDBusMessage::createMethodCall(
-                QStringLiteral("org.kde.kglobalaccel"),
-                QStringLiteral("/component/plasmashell"),
-                QStringLiteral("org.kde.kglobalaccel.Component"),
-                QStringLiteral("cleanUp")),
-            QDBus::NoBlock);
     }
 
     qDeleteAll(m_enginesHash);
@@ -129,6 +113,38 @@ void Babeleo::init()
         this,
         SLOT(onDbusShortcutPressed(QString, QString, qlonglong))
     );
+
+    // When the user explicitly removes the applet, clean up all global shortcut
+    // registrations. destroyedChanged fires while the applet is still alive (safe
+    // for D-Bus calls), which is preferable to doing it in the destructor.
+    connect(this, &Plasma::Applet::destroyedChanged, this, [this](bool isDestroyed) {
+        if (!isDestroyed)
+            return;
+
+        // Remove the manual-query global shortcut and its config entry.
+        if (m_manualQueryAction) {
+            KGlobalAccel::self()->removeAllShortcuts(m_manualQueryAction);
+            m_configuration.deleteEntry(QStringLiteral("manualQueryShortcut"));
+            m_configuration.sync();
+        }
+
+        // Remove the "activate widget N" entry that Plasma registers per applet
+        // instance but does not clean up on removal.
+        const QString activateKey = QStringLiteral("activate widget %1").arg(id());
+        KConfig kgrc(QStringLiteral("kglobalshortcutsrc"), KConfig::NoGlobals);
+        KConfigGroup group = kgrc.group(QStringLiteral("plasmashell"));
+        if (group.hasKey(activateKey)) {
+            group.deleteEntry(activateKey);
+            kgrc.sync();
+            QDBusConnection::sessionBus().call(
+                QDBusMessage::createMethodCall(
+                    QStringLiteral("org.kde.kglobalaccel"),
+                    QStringLiteral("/component/plasmashell"),
+                    QStringLiteral("org.kde.kglobalaccel.Component"),
+                    QStringLiteral("cleanUp")),
+                QDBus::NoBlock);
+        }
+    });
 
     // Notify QML that the engine list is ready. This handles the race condition
     // where QML finishes loading before C++ init() completes (e.g. fresh widget add).
