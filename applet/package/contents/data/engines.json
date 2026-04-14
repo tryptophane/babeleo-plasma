@@ -1,134 +1,149 @@
 [
     {
-        "name":     "Leo En - De",
-        "url":      "https://dict.leo.org/englisch-deutsch/%s",
-        "icon":     "babelfishleo-en",
-        "position": "main"
+        "name": "ArchWiki",
+        "url": "https://wiki.archlinux.org/index.php?search=%s",
+        "icon": "babelfishleo",
+        "position": "main",
+        "hidden": false
     },
     {
-        "name":     "Leo Fr - De",
-        "url":      "https://dict.leo.org/franz%C3%B6sisch-deutsch/%s",
-        "icon":     "babelfishleo-fr",
-        "position": "main"
+        "name": "DuckDuckGo",
+        "url": "https://duckduckgo.com/?q=%s&ia=web",
+        "icon": "babelfishleo",
+        "position": "main",
+        "hidden": false
     },
     {
-        "name":     "Leo Es - De",
-        "url":      "https://dict.leo.org/spanisch-deutsch/%s",
-        "icon":     "babelfishleo-es",
-        "position": "submenu"
+        "name": "Google Translate De",
+        "url": "https://translate.google.com/?sl=auto&tl=de&text=%s",
+        "icon": "babelfishleo",
+        "position": "main",
+        "hidden": false
     },
     {
-        "name":     "Leo It - De",
-        "url":      "https://dict.leo.org/italienisch-deutsch/%s",
-        "icon":     "babelfishleo-it",
-        "position": "submenu"
+        "name": "Leo En - De",
+        "url": "https://dict.leo.org/englisch-deutsch/%s",
+        "icon": "babelfishleo-en",
+        "position": "main",
+        "hidden": false
     },
     {
-        "name":     "Leo Ch - De",
-        "url":      "https://dict.leo.org/chinesisch-deutsch/%s",
-        "icon":     "babelfishleo-ch",
-        "position": "submenu"
+        "name": "Leo Fr - De",
+        "url": "https://dict.leo.org/franz%C3%B6sisch-deutsch/%s",
+        "icon": "babelfishleo-fr",
+        "position": "main",
+        "hidden": false
     },
     {
-        "name":     "DuckDuckGo",
-        "url":      "https://duckduckgo.com/?q=%s&ia=web",
-        "icon":     "babelfishleo",
-        "position": "main"
+        "name": "Wikipedia De",
+        "url": "https://de.wikipedia.org/w/index.php?search=%s",
+        "icon": "babelfishleo",
+        "position": "main",
+        "hidden": false
     },
     {
-        "name":     "Google Translate De",
-        "url":      "https://translate.google.com/?sl=auto&tl=de&text=%s",
-        "icon":     "babelfishleo",
-        "position": "main"
+        "name": "Amazon",
+        "url": "https://www.amazon.com/s?k=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Wikipedia DE",
-        "url":      "https://de.wikipedia.org/w/index.php?search=%s",
-        "icon":     "babelfishleo",
-        "position": "main"
+        "name": "dict.cc",
+        "url": "https://www.dict.cc/?s=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Amazon",
-        "url":      "https://www.amazon.de/s?k=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Duden",
+        "url": "https://www.duden.de/suchen/dudenonline/%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "ArchWiki",
-        "url":      "https://wiki.archlinux.org/index.php?search=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Google",
+        "url": "https://www.google.com/search?q=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Cambridge Dictionary",
-        "url":      "https://dictionary.cambridge.org/dictionary/english-german/%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Google Maps",
+        "url": "https://www.google.com/maps/search/?q=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Collins En - De",
-        "url":      "https://www.collinsdictionary.com/dictionary/english-german/%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Leo Ch - De",
+        "url": "https://dict.leo.org/chinesisch-deutsch/%s",
+        "icon": "babelfishleo-ch",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "dict.cc",
-        "url":      "https://www.dict.cc/?s=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Leo Es - De",
+        "url": "https://dict.leo.org/spanisch-deutsch/%s",
+        "icon": "babelfishleo-es",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Duden",
-        "url":      "https://www.duden.de/suchen/dudenonline/%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Leo It - De",
+        "url": "https://dict.leo.org/italienisch-deutsch/%s",
+        "icon": "babelfishleo-it",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Google",
-        "url":      "https://www.google.com/search?q=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Linguee",
+        "url": "https://www.linguee.com/english-german/search?source=auto&query=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Google Maps",
-        "url":      "https://www.google.com/maps/search/?q=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Merriam-Webster",
+        "url": "https://www.merriam-webster.com/dictionary/%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Linguee",
-        "url":      "https://www.linguee.com/english-german/search?source=auto&query=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "openDesktop.org",
+        "url": "https://www.opendesktop.org/find?search=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Merriam-Webster",
-        "url":      "https://www.merriam-webster.com/dictionary/%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "PubMed",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "PubMed",
-        "url":      "https://pubmed.ncbi.nlm.nih.gov/?term=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Real Academia Espanola",
+        "url": "https://dle.rae.es/%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Real Academia Espanola",
-        "url":      "https://dle.rae.es/%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Wikipedia En",
+        "url": "https://en.wikipedia.org/w/index.php?search=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     },
     {
-        "name":     "Wikipedia EN",
-        "url":      "https://en.wikipedia.org/w/index.php?search=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
-    },
-    {
-        "name":     "Wiktionary EN",
-        "url":      "https://en.wiktionary.org/w/index.php?search=%s",
-        "icon":     "babelfishleo",
-        "position": "submenu"
+        "name": "Wiktionary En",
+        "url": "https://en.wiktionary.org/w/index.php?search=%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
     }
 ]
