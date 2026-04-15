@@ -203,7 +203,10 @@ void Babeleo::createMenu()
         sortedNames.append(m_enginesList.value(i));
     }
 
-    std::sort(sortedNames.begin(), sortedNames.end());
+    std::sort(sortedNames.begin(), sortedNames.end(),
+              [](const QString &a, const QString &b) {
+                  return QString::compare(a, b, Qt::CaseInsensitive) < 0;
+              });
 
     QMenu *otherMenu = new QMenu(i18nd("plasma_applet_babeleo", "More search engines"));
 
