@@ -394,13 +394,6 @@ Item {
                     model: engineModel
                     clip: true
 
-                    highlight: Rectangle {
-                        color: Kirigami.Theme.highlightColor
-                        radius: 3
-                        opacity: 0.6
-                    }
-                    highlightMoveDuration: 0
-
                     delegate: QC.ItemDelegate {
                         width: ListView.view.width
                         highlighted: ListView.isCurrentItem
