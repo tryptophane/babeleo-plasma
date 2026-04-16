@@ -1,9 +1,7 @@
 # Babeleo — KDE Plasma 6 Quick Translation and Search Applet
 
-#### 🎉 **Finally!** The good old Babeleo Translator plasmoid is back in it's new Qt6 dress!
-
-A KDE Plasma 6 applet to query any web service with the clipboard content or typed text. The fastest way to translate or query any text on your desktop!  
-Select text with the mouse, click the icon — your browser opens the result directly.
+A KDE Plasma 6 applet to query any web service with the clipboard content or typed text. It provides a very fast way to translate or query any text on your desktop.  
+Select text with the mouse, click the icon or press the shortcut — your browser opens the result directly.
 Works with translation services, dictionaries, encyclopedias, search engines, and anything else you can reach with a URL.
 
 <img alt="Babeleo - At A Glance" src="https://github.com/user-attachments/assets/9a689101-feac-437f-ab61-8184de539459" />  
@@ -28,6 +26,7 @@ Manual query dialog, open it through the context menu or by a keyboard shortcut
 - **Desktop widget**: offers all the functionality of the panel applet with a clean layout
 - **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to search with the clipboard content without changing your current engine ("click & forget")
 - **Quick manual query on any engine**: Ctrl+Shift+Click an engine in the context menu of the panel applet to open the manual query dialog for this engine, without changing your current engine.
+- **Import / Export** of the search engines list
 
 ## Built-in services (all configurable)
 
@@ -46,7 +45,7 @@ Babeleo exposes two independent global keyboard shortcuts, both configurable in 
 - Query clipboard content with the selected engine
 - Open the manual query dialog
 
-Due to Plasma limitations, this shortcuts have to be configured on two distinct shortcut pages in the settings dialog.
+Due to Plasma limitations, this shortcuts have to be configured on two distinct pages in the settings dialog.
 
 ---
 
@@ -161,5 +160,5 @@ GPL-2.0-or-later — see [LICENSE](LICENSE)
 ## Credits
 
 - Icon based on *Crystal Clear app babelfish* by Everaldo Coelho (LGPL)
-- Original KDE 4 concept by Pascal Pollet (2009)
-- Ported to KDE Plasma 6 (2026) — most of the implementation by Claude Sonnet 4.6, directed by Pascal Pollet
+- Original KDE 4 plasmoid by Pascal Pollet (2009)
+- Ported to KDE Plasma 6 (2026) — with great help from Claude Sonnet 4.6

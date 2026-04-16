@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.11.0 (16.04.2026)
+
+- The main menu engines are now sorted on top in the list of the settings dialog and in the combobox of the desktop widget.The names of the main menu engines are highlighted (color depends on your KDE theme) 
+- Added Import / Export buttons in the engines settings page. The engines list is saved in JSON format (without downloaded icons)
+- Added a "Fetch All Icons" Button to the engines settings page. This will perform the "fetch Icon" action for all search engines which don't have a specific icon set (all those who have the yellow babelfishleo icon). It will work only for engines which have already been saved
+- In engines settings, when clicking on apply, the engines list is reloaded and re-sorted. The previously selected engine stays selected
+- The global shortcuts configured in babeleo are now correctly cleaned up when the applet is removed from the panel or desktop
+- Fixed some inconsistencies when deleting search engines, especially if the deleted engine was selected in the applet
+- A few updates to the default engines list. Added opendesktop.org, where you now could search for "babeleo" :-) 
+- The sorting of the search engines in the context menu is now case insensitive  
+- Fixed some warnings seen in the system logs which were related to the UI of the settings dialog pages.
+- Fixed some small UI glitches on selected items in the engines list of settings
+
 ## 0.10.0 (06.04.2026)
 
 - Desktop widget header icon is now clickable: single-click or double-click searches with clipboard content depending on the click behaviour setting
@@ -35,9 +48,9 @@
 
 ## 0.7.0 (18.03.2026)
 
-- **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to instantly search with the clipboard content, without changing your current engine ("click & forget").
-- Tooltip on each engine in the dropdown hints at the Ctrl+Click shortcut.
-- The text field of the manual query dialog is now correctly reset when the dialog opens.
+- **Quick search on any engine**: Ctrl+Click an engine in the context menu or the desktop widget dropdown to instantly search with the clipboard content, without changing your current engine ("click & forget")
+- Tooltip on each engine in the dropdown hints at the Ctrl+Click shortcut
+- The text field of the manual query dialog is now correctly reset when the dialog opens
 
 ## 0.6.0 (16.03.2026)
 

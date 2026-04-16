@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: babeleo 0.10.0\n"
+"Project-Id-Version: babeleo 0.11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2024-01-01 00:00+0100\n"
 "Last-Translator: Pascal Pollet <paspol@gmx.de>\n"
