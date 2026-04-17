@@ -135,9 +135,6 @@ public:
      */
     Q_INVOKABLE void fetchIcon(const QString &engineName, const QString &pageUrl);
 
-    /** Fetches favicons for all search engines. */
-    Q_INVOKABLE void fetchAllIcons();
-
     /**
      * Returns the list of search engines as a QVariantList for QML.
      * Each entry: {name, url, icon, position, hidden}

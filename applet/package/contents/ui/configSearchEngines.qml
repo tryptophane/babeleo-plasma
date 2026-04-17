@@ -81,6 +81,12 @@ Item {
     // Used by modelMatchesOriginal() to detect real changes vs. reverts.
     property var originalSnapshot: []
 
+    // Flag to indicate if we're currently fetching all icons, to manage button states and text.
+    property bool fetchingAllIcons: false
+
+    // Temporary list of engines without icons, used during fetchAllIcons() to determine when the last icon has been fetched.
+    property var enginesWithoutIcons: []
+
     ListModel {
         id: engineModel
     }
@@ -254,8 +260,17 @@ Item {
     Connections {
         target: Plasmoid.self
         function onIconFetched(engineName, iconPath) {
-            fetchButton.enabled = true
-            fetchButton.text = i18nd("plasma_applet_babeleo","Fetch Icon")
+            if (!fetchingAllIcons) {
+                fetchButton.enabled = true
+                fetchButton.text = i18nd("plasma_applet_babeleo","Fetch Icon")
+            }
+            if (fetchingAllIcons && engineName === enginesWithoutIcons[enginesWithoutIcons.length - 1].name) {
+                fetchingAllIcons = false
+                enginesWithoutIcons = []
+                fetchAllButton.enabled = true
+                fetchButton.enabled = true
+                fetchAllButton.text = i18nd("plasma_applet_babeleo", "Fetch All Icons")
+            }
             if (!iconPath) return
 
             // Update the local model entry
@@ -274,6 +289,30 @@ Item {
             // The icon file is already on disk. The path reference will be saved
             // to KConfig when the user clicks Apply or OK.
             unsavedChanges = !modelMatchesOriginal()
+        }
+    }
+
+    function getEnginesWithoutIcons() {
+        const engines = []
+        for (let i = 0; i < engineModel.count; i++) {
+            const eng = engineModel.get(i)
+            if (!eng.icon || eng.icon === "babelfishleo" || (!eng.icon.startsWith('/')
+                && !eng.icon.startsWith("file://"))) {
+                engines.push(eng)
+            }
+        }
+        return engines
+    }
+
+    function fetchAllIcons() {
+        fetchingAllIcons = true
+        fetchAllButton.enabled = false
+        fetchButton.enabled = false
+        fetchAllButton.text = i18nd("plasma_applet_babeleo","Downloading\u2026")
+        enginesWithoutIcons = getEnginesWithoutIcons()
+        for (let i = 0; i < enginesWithoutIcons.length; i++) {
+            const eng = enginesWithoutIcons[i]
+            Plasmoid.self.fetchIcon(eng.name, eng.url)
         }
     }
 
@@ -588,9 +627,10 @@ Item {
             spacing: Kirigami.Units.smallSpacing
 
             PC3.Button {
+                id: fetchAllButton
                 text: i18nd("plasma_applet_babeleo", "Fetch All Icons")
                 icon.name: "download"
-                onClicked: Plasmoid.self.fetchAllIcons()
+                onClicked:  fetchAllIcons()
                 PC3.ToolTip.text: i18nd("plasma_applet_babeleo", "Fetch missing favicons from their respective websites, if available.")
                 PC3.ToolTip.visible: hovered
                 PC3.ToolTip.delay: Kirigami.Units.toolTipDelay

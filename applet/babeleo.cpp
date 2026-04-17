@@ -529,20 +529,6 @@ void Babeleo::fetchIcon(const QString &engineName, const QString &pageUrl)
     });
 }
 
-void Babeleo::fetchAllIcons()
-{
-    for (auto it = m_enginesHash.constBegin(); it != m_enginesHash.constEnd(); ++it) {
-        const Babelengine *eng = it.value();
-        const QString icon = eng->getIcon();
-        if (!icon.startsWith(QLatin1String("babelfishleo-"))
-                && !icon.startsWith(QLatin1Char('/'))
-                && !icon.startsWith(QLatin1String("file://"))) {
-            fetchIcon(eng->getName(), eng->getURL());
-        }
-    }
-}
-
-
 QVariantList Babeleo::engineList() const
 {
     QVariantList result;
