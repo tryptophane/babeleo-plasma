@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2009 Pascal Pollet <pascal@bongosoft.de>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 /*
  * Babeleo - Search Engines configuration page
  *

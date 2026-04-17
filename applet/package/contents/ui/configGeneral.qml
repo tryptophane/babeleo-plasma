@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2009 Pascal Pollet <pascal@bongosoft.de>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 /*
  * Babeleo - KDE Plasma 6 Plasmoid
  * Config page: click behaviour and keyboard shortcuts.

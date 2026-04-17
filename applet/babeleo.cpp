@@ -1,14 +1,5 @@
-/***********************************************************************************
-* Babeleo: Plasmoid for translating clipboard content at leo.org.
-* Copyright (C) 2009 Pascal Pollet <pascal@bongosoft.de>
-*
-* Plasma 6 / KDE Frameworks 6 port.
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 2
-* of the License, or (at your option) any later version.
-***********************************************************************************/
+// SPDX-FileCopyrightText: 2009 Pascal Pollet <pascal@bongosoft.de>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "babeleo.h"
 
