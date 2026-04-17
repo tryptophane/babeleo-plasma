@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.12.0 (17.04.2026)
+
+- The "Fetch All Icons" functionality now also works for engines which have not already been saved (by clicking on "Apply"" or "OK")
+- Replaced the LICENSE file with the GPL 2 license. It contained the GPL 3 by error, Babeleo was always licensed under GPL 2 or later
+- Added SPDX headers to all C++ and QML files, tagging the files as licensed under GPL-2.0-or-later
+
+
 ## 0.11.0 (16.04.2026)
 
 - The main menu engines are now sorted on top in the list of the settings dialog and in the combobox of the desktop widget.The names of the main menu engines are highlighted (color depends on your KDE theme) 
