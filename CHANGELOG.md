@@ -4,8 +4,8 @@
 
 - It is now possible to configure custom URI schemes like "spotify:search:%s" as the search engines URL. Very handy for example to quickly search for the currently running track (maybe in you favorite web radio) directly in the spotify app (if installed),
 - Added "Spotify (App)" ans "Spotify (browser) to the default search engines, the second one is hidden by default
-* The text in the textfields of the search engines settings page is now selected automatically on focus
-* Added a tooltip to the "Fetch icon" button in the engines settings page
+- The text in the textfields of the search engines settings page is now selected automatically on focus
+- Added a tooltip to the "Fetch icon" button in the engines settings page
 
 ## 0.12.0 (17.04.2026)
 
