@@ -570,6 +570,9 @@ Item {
                         id: fetchButton
                         text: i18nd("plasma_applet_babeleo","Fetch Icon")
                         icon.name: "download"
+                        PC3.ToolTip.text: i18nd("plasma_applet_babeleo","Download favicon from the website, if available")
+                        PC3.ToolTip.visible: hovered
+                        PC3.ToolTip.delay: Kirigami.Units.toolTipDelay
                         onClicked: {
                             commitCurrentToModel()
                             fetchButton.enabled = false

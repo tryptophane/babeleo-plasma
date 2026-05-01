@@ -64,6 +64,10 @@ msgid "Fetch Icon"
 msgstr "Symbol laden"
 
 #: applet/package/contents/ui/configSearchEngines.qml
+msgid "Download favicon from the website, if available"
+msgstr "Favicon von der Webseite herunterladen, falls verfügbar"
+
+#: applet/package/contents/ui/configSearchEngines.qml
 msgid "Downloading…"
 msgstr "Wird geladen…"
 
