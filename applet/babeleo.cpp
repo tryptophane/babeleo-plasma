@@ -361,10 +361,18 @@ void Babeleo::openUrl(const QString &engineName, const QString &query)
     const QString encodedQuery = QString::fromUtf8(QUrl::toPercentEncoding(query));
     urlTemplate.replace(QLatin1String("%s"), encodedQuery);
 
-    auto *job = new KIO::OpenUrlJob(QUrl(urlTemplate));
-    job->setRunExecutables(false); // Security: only open URLs, do not launch programs
-
-    withActivationToken([job]() { job->start(); });
+    const QString scheme = QUrl::fromEncoded(urlTemplate.toUtf8()).scheme();
+    if (scheme == QLatin1String("http") || scheme == QLatin1String("https")) {
+        auto *job = new KIO::OpenUrlJob(QUrl::fromEncoded(urlTemplate.toUtf8()));
+        job->setRunExecutables(false);
+        withActivationToken([job]() { job->start(); });
+    } else {
+        // For custom URI schemes (e.g. spotify:), bypass KIO/QUrl: both decode %20 to spaces
+        // before passing to xdg-open, which then splits on spaces when exec'ing the handler.
+        withActivationToken([urlTemplate]() {
+            QProcess::startDetached(QStringLiteral("gio"), {QStringLiteral("open"), urlTemplate});
+        });
+    }
 }
 
 QString Babeleo::readClipboard()
