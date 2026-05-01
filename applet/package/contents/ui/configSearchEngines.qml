@@ -541,6 +541,7 @@ Item {
                     id: nameField
                     Layout.fillWidth: true
                     onTextChanged: if (!loading) checkForChanges()
+                    onFocusChanged:if(focus) selectAll()
                 }
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2}
@@ -550,6 +551,7 @@ Item {
                     id: urlField
                     Layout.fillWidth: true
                     onTextChanged: if (!loading) checkForChanges()
+                    onFocusChanged:if(focus) selectAll()
                 }
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2 }
@@ -562,6 +564,7 @@ Item {
                         Layout.fillWidth: true
                         placeholderText: i18nd("plasma_applet_babeleo","Theme name or file path")
                         onTextChanged: if (!loading) checkForChanges()
+                        onFocusChanged: if(focus) selectAll()
                     }
                     PC3.Button {
                         id: fetchButton
