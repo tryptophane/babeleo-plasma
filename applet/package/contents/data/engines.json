@@ -35,8 +35,8 @@
         "hidden": false
     },
     {
-        "name": "Wikipedia De",
-        "url": "https://de.wikipedia.org/w/index.php?search=%s",
+        "name": "Wikipedia En",
+        "url": "https://en.wikipedia.org/w/index.php?search=%s",
         "icon": "babelfishleo",
         "position": "main",
         "hidden": false
@@ -112,13 +112,6 @@
         "hidden": false
     },
     {
-        "name": "openDesktop.org",
-        "url": "https://www.opendesktop.org/find?search=%s",
-        "icon": "babelfishleo",
-        "position": "submenu",
-        "hidden": false
-    },
-    {
         "name": "PubMed",
         "url": "https://pubmed.ncbi.nlm.nih.gov/?term=%s",
         "icon": "babelfishleo",
@@ -133,8 +126,22 @@
         "hidden": false
     },
     {
-        "name": "Wikipedia En",
-        "url": "https://en.wikipedia.org/w/index.php?search=%s",
+        "name": "Spotify (App)",
+        "url": "spotify:search:%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": false
+    },
+    {
+        "name": "Spotify (Browser)",
+        "url": "https://open.spotify.com/search/%s",
+        "icon": "babelfishleo",
+        "position": "submenu",
+        "hidden": true
+    },
+    {
+        "name": "Wikipedia De",
+        "url": "https://de.wikipedia.org/w/index.php?search=%s",
         "icon": "babelfishleo",
         "position": "submenu",
         "hidden": false
