@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.1 (04.05.2026)
+
+- Bugfix: when all windows on the desktop were minimized, the manual query dialog closed itsel immedialtely when opened from the context menu
+
 ## 0.13.0 (02.05.2026)
 
 - It is now possible to configure custom URI schemes like "spotify:search:%s" as the search engines URL. Very handy for example to quickly search for the currently running track (maybe in you favorite web radio) directly in the spotify app (if installed),
