@@ -241,7 +241,7 @@ void Babeleo::createMenu()
 
     QAction *manualQueryAction = new QAction(i18nd("plasma_applet_babeleo", "Manual query..."), this);
     connect(manualQueryAction, &QAction::triggered, this, [this]() {
-        Q_EMIT requestTogglePopup();
+        withActivationToken([this]() { Q_EMIT requestTogglePopup(); });
     });
     m_actions.append(manualQueryAction);
 
