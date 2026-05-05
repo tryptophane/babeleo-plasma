@@ -2,7 +2,7 @@
 
 ## 0.13.1 (04.05.2026)
 
-- Bugfix: when all windows on the desktop were minimized, the manual query dialog closed itsel immedialtely when opened from the context menu
+- Bugfix: when all windows on the desktop were minimized, the manual query dialog closed itself immedialtely when opened from the context menu
 
 ## 0.13.0 (02.05.2026)
 
