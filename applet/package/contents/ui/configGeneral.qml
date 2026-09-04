@@ -10,7 +10,6 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kquickcontrols
-import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
 
 Item {
@@ -62,7 +61,7 @@ Item {
             Layout.fillWidth: true
             spacing: Kirigami.Units.largeSpacing
     
-            PlasmaComponents3.Label {
+            QQC2.Label {
                 text: i18nd("plasma_applet_babeleo", "Click Behavior")
                 color: Kirigami.Theme.disabledTextColor
                 font.bold: true
@@ -77,14 +76,14 @@ Item {
 
         QQC2.ButtonGroup { id: clickModeGroup }
 
-        PlasmaComponents3.RadioButton {
+        QQC2.RadioButton {
             QQC2.ButtonGroup.group: clickModeGroup
             text: i18nd("plasma_applet_babeleo", "Single click: search with clipboard content")
             checked: !cfg_doubleClickMode
             onToggled: if (checked) { cfg_doubleClickMode = false; checkUnsavedChanges() }
         }
 
-        PlasmaComponents3.RadioButton {
+        QQC2.RadioButton {
             QQC2.ButtonGroup.group: clickModeGroup
             text: i18nd("plasma_applet_babeleo", "Double click: search with clipboard content")
             checked: cfg_doubleClickMode
@@ -92,7 +91,7 @@ Item {
         }
 
         // Discreet hint, only visible when double-click mode is selected and in panel
-        PlasmaComponents3.Label {
+        QQC2.Label {
             visible: cfg_doubleClickMode && Plasmoid.formFactor !== 0
             text: i18nd("plasma_applet_babeleo", "A single left click will open the context menu (same as right click).")
             color: Kirigami.Theme.disabledTextColor
@@ -114,7 +113,7 @@ Item {
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
-            PlasmaComponents3.Label {
+            QQC2.Label {
                 text: i18nd("plasma_applet_babeleo", "Keyboard Shortcut")
                 color: Kirigami.Theme.disabledTextColor
                 font.bold: true

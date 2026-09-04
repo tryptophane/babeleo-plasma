@@ -36,11 +36,10 @@
  */
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls as QC
+import QtQuick.Controls as QQC2
 import QtQuick.Dialogs
 import QtCore
 import org.kde.plasma.plasmoid
-import org.kde.plasma.components as PC3
 import org.kde.kirigami as Kirigami
 
 Item {
@@ -426,7 +425,7 @@ Item {
             Layout.fillHeight: true
             spacing: Kirigami.Units.smallSpacing
 
-            PC3.ScrollView {
+            QQC2.ScrollView {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.bottomMargin: Kirigami.Units.smallSpacing
@@ -436,7 +435,7 @@ Item {
                     model: engineModel
                     clip: true
 
-                    delegate: QC.ItemDelegate {
+                    delegate: QQC2.ItemDelegate {
                         width: ListView.view.width
                         highlighted: ListView.isCurrentItem
 
@@ -449,7 +448,7 @@ Item {
                                 implicitHeight: Kirigami.Units.iconSizes.small
                                 opacity: model.hidden ? 0.4 : 1.0
                             }
-                            PC3.Label {
+                            QQC2.Label {
                                 text: model.name
                                 color: model.hidden
                                     ? Kirigami.Theme.disabledTextColor
@@ -475,7 +474,7 @@ Item {
                 Layout.bottomMargin: Kirigami.Units.smallSpacing
                 spacing: Kirigami.Units.smallSpacing
 
-                PC3.Button {
+                QQC2.Button {
                     icon.name: "list-add"
                     text: i18nd("plasma_applet_babeleo","Add")
                     Layout.fillWidth: true
@@ -494,7 +493,7 @@ Item {
                     }
                 }
 
-                PC3.Button {
+                QQC2.Button {
                     icon.name: "list-remove"
                     text: i18nd("plasma_applet_babeleo","Delete")
                     Layout.fillWidth: true
@@ -536,8 +535,8 @@ Item {
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 spacing: Kirigami.Units.smallSpacing
 
-                PC3.Label { text: i18nd("plasma_applet_babeleo","Name:") }
-                PC3.TextField {
+                QQC2.Label { text: i18nd("plasma_applet_babeleo","Name:") }
+                QQC2.TextField {
                     id: nameField
                     Layout.fillWidth: true
                     onTextChanged: if (!loading) checkForChanges()
@@ -546,8 +545,8 @@ Item {
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2}
 
-                PC3.Label { text: i18nd("plasma_applet_babeleo","URL (%s = search term):") }
-                PC3.TextField {
+                QQC2.Label { text: i18nd("plasma_applet_babeleo","URL (%s = search term):") }
+                QQC2.TextField {
                     id: urlField
                     Layout.fillWidth: true
                     onTextChanged: if (!loading) checkForChanges()
@@ -556,23 +555,23 @@ Item {
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2 }
 
-                PC3.Label { text: i18nd("plasma_applet_babeleo","Icon:") }
+                QQC2.Label { text: i18nd("plasma_applet_babeleo","Icon:") }
                 RowLayout {
                     Layout.fillWidth: true
-                    PC3.TextField {
+                    QQC2.TextField {
                         id: iconField
                         Layout.fillWidth: true
                         placeholderText: i18nd("plasma_applet_babeleo","Theme name or file path")
                         onTextChanged: if (!loading) checkForChanges()
                         onFocusChanged: if(focus) selectAll()
                     }
-                    PC3.Button {
+                    QQC2.Button {
                         id: fetchButton
                         text: i18nd("plasma_applet_babeleo","Fetch Icon")
                         icon.name: "download"
-                        PC3.ToolTip.text: i18nd("plasma_applet_babeleo","Download favicon from the website, if available")
-                        PC3.ToolTip.visible: hovered
-                        PC3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                        QQC2.ToolTip.text: i18nd("plasma_applet_babeleo","Download favicon from the website, if available")
+                        QQC2.ToolTip.visible: hovered
+                        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                         onClicked: {
                             commitCurrentToModel()
                             fetchButton.enabled = false
@@ -584,8 +583,8 @@ Item {
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2 }
 
-                PC3.Label { text: i18nd("plasma_applet_babeleo","Visibility:") }
-                PC3.CheckBox {
+                QQC2.Label { text: i18nd("plasma_applet_babeleo","Visibility:") }
+                QQC2.CheckBox {
                     id: hideBox
                     text: i18nd("plasma_applet_babeleo","Hide this search engine")
                     onCheckedChanged: if (!loading) checkForChanges()
@@ -593,14 +592,14 @@ Item {
 
                 Item { Layout.fillWidth: true; implicitHeight: Kirigami.Units.largeSpacing * 2 }
 
-                PC3.Label { text: i18nd("plasma_applet_babeleo","Position:") }
+                QQC2.Label { text: i18nd("plasma_applet_babeleo","Position:") }
                 RowLayout {
-                    PC3.RadioButton {
+                    QQC2.RadioButton {
                         id: mainMenuRadio
                         text: i18nd("plasma_applet_babeleo","Main menu")
                         onCheckedChanged: if (!loading && checked) checkForChanges()
                     }
-                    PC3.RadioButton {
+                    QQC2.RadioButton {
                         id: otherRadio
                         Layout.leftMargin: Kirigami.Units.largeSpacing * 2
                         text: i18nd("plasma_applet_babeleo","More search engines submenu")
@@ -635,33 +634,33 @@ Item {
             Layout.rightMargin: Kirigami.Units.largeSpacing
             spacing: Kirigami.Units.smallSpacing
 
-            PC3.Button {
+            QQC2.Button {
                 id: fetchAllButton
                 text: i18nd("plasma_applet_babeleo", "Fetch All Icons")
                 icon.name: "download"
                 onClicked:  fetchAllIcons()
-                PC3.ToolTip.text: i18nd("plasma_applet_babeleo", "Fetch missing favicons from their respective websites, if available.")
-                PC3.ToolTip.visible: hovered
-                PC3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                QQC2.ToolTip.text: i18nd("plasma_applet_babeleo", "Fetch missing favicons from their respective websites, if available.")
+                QQC2.ToolTip.visible: hovered
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
 
             Item { Layout.fillWidth: true }
 
-            PC3.Button {
+            QQC2.Button {
                 text: i18nd("plasma_applet_babeleo", "Export…")
                 icon.name: "document-export"
                 onClicked: exportFileDialog.open()
-                PC3.ToolTip.text: i18nd("plasma_applet_babeleo", "Export the search engine list to a JSON file. Note: custom icons fetched from websites will not be included.")
-                PC3.ToolTip.visible: hovered
-                PC3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                QQC2.ToolTip.text: i18nd("plasma_applet_babeleo", "Export the search engine list to a JSON file. Note: custom icons fetched from websites will not be included.")
+                QQC2.ToolTip.visible: hovered
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
-            PC3.Button {
+            QQC2.Button {
                 text: i18nd("plasma_applet_babeleo", "Import…")
                 icon.name: "document-import"
                 onClicked: importFileDialog.open()
-                PC3.ToolTip.text: i18nd("plasma_applet_babeleo", "Import search engines from a JSON file. This will completely replace your current list.")
-                PC3.ToolTip.visible: hovered
-                PC3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                QQC2.ToolTip.text: i18nd("plasma_applet_babeleo", "Import search engines from a JSON file. This will completely replace your current list.")
+                QQC2.ToolTip.visible: hovered
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
         }
     }
