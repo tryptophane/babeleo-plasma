@@ -95,14 +95,15 @@ kquitapp6 plasmashell && kstart plasmashell
 
 **Arch Linux / Manjaro:**
 ```bash
-sudo pacman -S cmake extra-cmake-modules libplasma \
+sudo pacman -S base-devel cmake extra-cmake-modules libplasma \
     qt6-base ki18n kio kcoreaddons kconfig \
     kglobalaccel kwidgetsaddons kxmlgui kwindowsystem wl-clipboard
 ```
 
 **KDE Neon / Ubuntu with Plasma 6:**
 ```bash
-sudo apt install cmake extra-cmake-modules libplasma-dev qt6-base-dev \
+sudo apt install build-essential gettext \
+    cmake extra-cmake-modules libplasma-dev qt6-base-dev \
     libkf6coreaddons-dev libkf6i18n-dev libkf6config-dev \
     libkf6globalaccel-dev libkf6kio-dev libkf6widgetsaddons-dev \
     libkf6xmlgui-dev libkf6windowsystem-dev wl-clipboard
@@ -110,7 +111,8 @@ sudo apt install cmake extra-cmake-modules libplasma-dev qt6-base-dev \
 
 **Fedora:**
 ```bash
-sudo dnf install cmake extra-cmake-modules plasma-devel qt6-qtbase-devel \
+sudo dnf install gcc-c++ make gettext \
+    cmake extra-cmake-modules plasma-devel qt6-qtbase-devel \
     kf6-kcoreaddons-devel kf6-ki18n-devel kf6-kconfig-devel \
     kf6-kglobalaccel-devel kf6-kio-devel kf6-kwidgetsaddons-devel \
     kf6-kxmlgui-devel kf6-kwindowsystem-devel wl-clipboard
