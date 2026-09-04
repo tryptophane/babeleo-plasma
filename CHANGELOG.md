@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.2 (04.09.2026)
+
+- Bugfix: in the settings dialog, buttons, text fields and unchecked checkboxes and radio buttons were drawn with a black background (black text on black) with themes that combine a dark Plasma style with a light application color scheme, for example the "Kubuntu" theme. The config pages now use plain QtQuick Controls instead of Plasma components, so they follow the application color scheme like the rest of the dialog
+
 ## 0.13.1 (04.05.2026)
 
 - Bugfix: when all windows on the desktop were minimized, the manual query dialog closed itself immedialtely when opened from the context menu
